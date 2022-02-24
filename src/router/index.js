@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import store from "@/store"
 
 /* Layout */
-import Layout from '@/layout/index.vue'
+// import Layout from '@/layout/index.vue'
 
 Vue.use(VueRouter)
 
@@ -13,37 +13,18 @@ export const asyncRootMap = [
   {
     path: '/',
     name: 'Root',
-    redirect: '/home',
-  },
-]
-export const constantRouterMap = [
-  {
-    path: '/',
-    name: 'Root',
-    redirect: '/home',
+    redirect: '/login',
     meta: { title: '重定向'},
   },
+]
+
+export const constantRouterMap = [
   {
     path: '/login',
     name: 'Login',
-    meta: { title: '登录'},
+    meta: { title: '登录', hidden: true},
     component: () => import('@/views/login'),
   },
-  {
-    path: '/home',
-    name: 'Home',
-    component: Layout,
-    redirect: '/home/cockpit',
-    meta: { title: '首页'},
-    children: [
-        {
-          path: 'cockpit',
-          name: 'Cockpit',
-          meta: { title: '首页'},
-          component: () => import("@/views/home")
-        }
-    ]
-  }
 ]
 
 //所有权限通用路由表
@@ -85,25 +66,31 @@ VueRouter.prototype.push = function push(location) {
 
 let whiteList = []
 router.beforeEach((to,from,next) => {
-
-  console.log(to, to.path)
   if(store.getters.token){
     // 判断是否有token
     if(to.path === '/login'){
-      // console.log("主动跳转Login 已登录 重定向根路径")
       next("/")
     } else {
       // 判断是否已经获取权限列表
       if(store.getters.roles.length === 0) {
-        console.log("权限列表为空，开始获取权限 加载动态路由")
         // 拉去用户信息 USER_INFO
         // store.dispatch("", {}) || axios
         // 请求 res =>
           // roles = res请求返回的权限列表
           const roles = ["admin"]
           store.dispatch("GenerateRoutes", roles).then(() => {
-            console.log("添加addRouters", store.getters.addRouters)
-            router.addRoutes(store.getters.addRouters) // 动态添加可访问路由表
+            const route = [].concat(
+                store.getters.replaceRouters,
+                store.getters.addRouters,
+                store.getters.defaultRouters
+            )
+            // router.addRoutes(store.getters.replaceRouters) // 添加重定向路径
+            //
+            // router.addRoutes(store.getters.addRouters) // 动态添加可访问路由表
+            //
+            // router.addRoutes(store.getters.defaultRouters) // 动态添加可访问路由表 - ErrorPages
+            //
+            router.addRoutes(route) // 动态添加可访问路由表
             next({...to, replace: true})
           })
 

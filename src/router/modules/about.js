@@ -1,23 +1,19 @@
 import Layout from "@/layout";
 
-const about = {
-    path: '/about',
-    name: 'About',
+const home = {
+    path: '/home',
+    name: 'Home',
     component: Layout,
-    redirect: '/about/we',
-    meta: {title: 'About', singlePage: true, breadcrumb: false, role: ['admin', 'super_editor']},
-    children: [{
-        path: 'we',
-        name: 'We',
-        component: () => import('@/views/about'),
-        meta: {
-            title: '关于我们',
-            iconImg: 'menu_icon_default.png',
-            iconImgActive: 'menu_icon_active.png',
-            breadcrumb: false,
-            role: ['admin', 'super_editor']
+    redirect: '/home/cockpit',
+    meta: { title: '首页', hidden: false},
+    children: [
+        {
+            path: 'cockpit',
+            name: 'Cockpit',
+            meta: { title: '首页'},
+            component: () => import("@/views/home")
         }
-    }]
+    ]
 }
 
-export default about
+export default home
