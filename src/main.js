@@ -8,6 +8,10 @@ import 'element-ui/lib/theme-chalk/index.css';
 
 Vue.use(ElementUI);
 
+import api from '@/api'
+
+Vue.prototype.$api = api
+
 Vue.config.productionTip = false
 
 new Vue({

@@ -2,6 +2,7 @@ import { constantRouterMap, constantRouterErrorMap, asyncRootMap } from "@/route
 import { asyncRoutesArr } from "@/router/routes.js"
 
 const state = {
+    isRoles: false,
     roles: [],
     routers: [],
     addRouters: [],
@@ -15,6 +16,7 @@ const mutations = {
         state.routers = constantRouterMap.concat(routes)
     },
     SET_ROLES(state, roles) {
+        state.isRoles = true
         state.roles = roles
     },
     SET_DEFAULT_ROUTES(state) {
@@ -49,6 +51,7 @@ const actions = {
                 commit('SET_REPLACE_PATH', replacePath)
                 commit('SET_DEFAULT_ROUTES')
                 commit('SET_ROUTES', accessedRouters)
+
                 resolve()
             }, 1000)
         })

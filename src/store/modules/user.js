@@ -12,6 +12,11 @@ const mutations = {
         sessionStorage.setItem("token", data);
         state.token = data
         state.isLogin = true
+    },
+    CLEAR_TOKEN(state) {
+        sessionStorage.clear()
+        state.token = null
+        state.isLogin = false
     }
 }
 
@@ -23,6 +28,12 @@ const actions = {
                 commit("SET_TOKEN", res.token)
                 resolve()
             }
+        })
+    },
+    LoginOut({ commit }) {
+        return new Promise(resolve => {
+            commit("CLEAR_TOKEN")
+            resolve()
         })
     }
 }
