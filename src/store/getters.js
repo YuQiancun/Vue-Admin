@@ -1,11 +1,9 @@
 const getters = {
-    isLogin: state => state.user.isLogin
-    // userToken: state => state.user.token,
-    // user: state => state.user.user,
-    // dept: state => state.user.dept,
-    // breadcrumbPath: state => JSON.parse(state.config.breadcrumb),
-    // keepAlivePage: state => state.config.keepAliveView,
-    // menuRoutes: state => state.permission.menuRoutes,
-    // rootPath: state => state.permission.rootPath
+    token: state => state.user.token,
+    isLogin: state => state.user.isLogin,
+    user_info: state => state.user.user_info,
+    roles: state => state.permission.roles,
+    routers: state => state.permission.routers,
+    addRouters: state => state.permission.addRouters,
 }
 export default getters

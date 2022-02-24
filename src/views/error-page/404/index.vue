@@ -1,14 +1,12 @@
 <template>
-  <div class="menu_manage">
-    <div>
-      menu_manage
-    </div>
+  <div class="error">
+    404
   </div>
 </template>
 
 <script>
 export default {
-  name: "MenuManage"
+  name: "index.vue"
 }
 </script>
 
