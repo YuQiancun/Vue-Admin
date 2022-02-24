@@ -21,7 +21,8 @@ function FilterMenuRoles(roles = [], menu = {}, redirect = []) {
                 let redirectPath = JSON.parse(JSON.stringify(redirect))
                 redirectPath.push(subMenu.path.replace(/\//, ''))
                 subMenu.children = FilterMenuRoles(item.children, toEnumeration(subMenu.children, "name", str => String(str).toLowerCase()), redirectPath)
-                subMenu.children.length > 0 && (subMenu.redirect = ("/" + redirectPath.join("/") + "/" + subMenu.children[0].path))
+                subMenu.children.length > 0 && (subMenu.redirect = "/".concat(redirectPath.join("/"), "/", subMenu.children[0].path))
+                subMenu.children.length === 0 && delete subMenu.redirect
                 FilterMenuMeta(item, subMenu)
                 arr.push(subMenu)
             } else {
