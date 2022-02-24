@@ -1,5 +1,5 @@
 module.exports = {
-    lintOnSave: false, //开启关闭eslint
+    lintOnSave: true, //开启关闭eslint
     devServer: {
         // proxy: {
         //     [process.env.VUE_APP_BASE_API]: { // 配置跨域的名字

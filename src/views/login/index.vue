@@ -1,12 +1,5 @@
 <template>
   <div class="login">
-    {{ api }}
-    <br>
-    {{   $store.getters.isRoles }}
-    <div>{{ $store.getters.token }}</div>
-    <pre>
-      {{ $store.getters.routers }}
-    </pre>
     <el-button @click="onLogin" v-loading="loading">onLogin</el-button>
     <el-button @click="onGetRoutes">onGetRoutes</el-button>
     <el-button @click="onAddRouterOptions">onAddRouterOptions</el-button>

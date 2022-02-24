@@ -1,5 +1,39 @@
 import { constantRouterMap, constantRouterErrorMap, asyncRootMap } from "@/router"
-import { asyncRoutesArr } from "@/router/routes.js"
+import { asyncRoutes } from "@/router/routes.js"
+import { toEnumeration } from "@/libs/utils"
+
+function FilterMenuMeta(role, menu) {
+    if(role.meta){
+        if(menu.meta) {
+            Object.assign(menu.meta, role.meta)
+        } else {
+            menu.meta = role.meta
+        }
+    }
+}
+
+function FilterMenuRoles(roles = [], menu = {}, redirect = []) {
+    let arr = []
+    roles.forEach(item => {
+        if(menu[item.name.toLowerCase()]) {
+            if(item.children && menu[item.name.toLowerCase()].children) {
+                let subMenu = menu[item.name.toLowerCase()]
+                let redirectPath = JSON.parse(JSON.stringify(redirect))
+                redirectPath.push(subMenu.path.replace(/\//, ''))
+                subMenu.children = FilterMenuRoles(item.children, toEnumeration(subMenu.children, "name", str => String(str).toLowerCase()), redirectPath)
+                subMenu.children.length > 0 && (subMenu.redirect = ("/" + redirectPath.join("/") + "/" + subMenu.children[0].path))
+                FilterMenuMeta(item, subMenu)
+                arr.push(subMenu)
+            } else {
+                let subMenu = menu[item.name.toLowerCase()]
+                delete subMenu.children
+                FilterMenuMeta(item, subMenu)
+                arr.push({...subMenu})
+            }
+        }
+    })
+    return arr
+}
 
 const state = {
     isRoles: false,
@@ -33,10 +67,13 @@ const actions = {
 
             // axios请求完全菜单 || 对比本地菜单过滤
             let accessedRouters = []
-            setTimeout(() => {
-                accessedRouters = asyncRoutesArr.filter(route => {
-                    return !/^A$/.test(route.name)
-                })
+            // setTimeout(() => {
+                // console.log(FilterMenuRoles(roles, asyncRoutes))
+                // accessedRouters = asyncRoutesArr.filter(route => {
+                //     return !/^A$/.test(route.name)
+                // })
+                accessedRouters = FilterMenuRoles(roles, asyncRoutes)
+                console.log(accessedRouters)
                 commit('SET_ROLES', roles)
                 // 如果没有Home首页访问权限，则获取顺序第一个的首页
                 const rootPath = () => {
@@ -53,7 +90,7 @@ const actions = {
                 commit('SET_ROUTES', accessedRouters)
 
                 resolve()
-            }, 1000)
+            // }, 1000)
         })
     }
 }
