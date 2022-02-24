@@ -1,17 +1,26 @@
-
+/**
+ *
+ * @type {{userInfo: {}, isLogin: boolean, token: (string|null)}}
+ */
 
 const state = {
-    token: sessionStorage.getItem("token") || null,
-    user_info: {},
+    token: localStorage.getItem("token") || null,
+    userInfo: {},
     isLogin: false
 }
 
 const mutations = {
     SET_TOKEN(state, data) {
         // 存储
-        sessionStorage.setItem("token", data);
+        localStorage.setItem("token", data);
         state.token = data
         state.isLogin = true
+    },
+    CLEAR_TOKEN(state) {
+        // 清除
+        localStorage.clear()
+        state.token = null
+        state.isLogin = false
     }
 }
 
@@ -23,6 +32,12 @@ const actions = {
                 commit("SET_TOKEN", res.token)
                 resolve()
             }
+        })
+    },
+    LoginOut({ commit }) {
+        return new Promise(resolve => {
+            commit("CLEAR_TOKEN")
+            resolve()
         })
     }
 }

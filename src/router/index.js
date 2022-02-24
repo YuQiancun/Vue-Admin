@@ -72,13 +72,16 @@ router.beforeEach((to,from,next) => {
       next("/")
     } else {
       // 判断是否已经获取权限列表
-      if(store.getters.roles.length === 0) {
+      // console.log(store.getters.isLogin)
+      if(!store.getters.isRoles) {
         // 拉去用户信息 USER_INFO
         // store.dispatch("", {}) || axios
         // 请求 res =>
           // roles = res请求返回的权限列表
-          const roles = ["admin"]
-          store.dispatch("GenerateRoutes", roles).then(() => {
+        Vue.prototype.$api.post({url: '/api/menutree'}).then(res => {
+          // console.log(res)
+          // const roles = ["admin"]
+          store.dispatch("GenerateRoutes", res).then(() => {
             const route = [].concat(
                 store.getters.replaceRouters,
                 store.getters.addRouters,
@@ -94,6 +97,7 @@ router.beforeEach((to,from,next) => {
             next({...to, replace: true})
           })
 
+        })
         // 请求 error =>
         // console.log(error)
       } else {
