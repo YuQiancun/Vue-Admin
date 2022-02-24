@@ -1,6 +1,8 @@
 <template>
   <el-container class="layout">
-    <el-header class="layout_header">Header</el-header>
+    <el-header class="layout_header">
+      <LayoutHeader />
+    </el-header>
     <el-container class="layout_container">
       <el-aside class="layout_aside" width="180px">
         <LayoutMenu />
@@ -15,10 +17,11 @@
 </template>
 
 <script>
+import LayoutHeader from "./components/header"
 import LayoutMenu from "./components/menu"
 export default {
   name: "index",
-  components: { LayoutMenu },
+  components: { LayoutHeader, LayoutMenu },
   data() {
     return {}
   }
