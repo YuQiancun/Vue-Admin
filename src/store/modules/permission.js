@@ -2,6 +2,7 @@ import { constantRouterMap, constantRouterErrorMap, asyncRootMap } from "@/route
 import { asyncRoutes } from "@/router/routes.js"
 import { toEnumeration } from "@/libs/utils"
 
+// 数据库返回Meta标签合并到本地Meta
 function FilterMenuMeta(role, menu) {
     if(role.meta){
         if(menu.meta) {
@@ -12,6 +13,7 @@ function FilterMenuMeta(role, menu) {
     }
 }
 
+// 以数据库返回为准，对比权限获取本地Router的权限路径
 function FilterMenuRoles(roles = [], menu = {}, redirect = []) {
     let arr = []
     roles.forEach(item => {
@@ -121,7 +123,7 @@ const actions = {
                 commit('SET_ROLES', roles)
                 // 如果没有Home首页访问权限，则获取顺序第一个的首页 meta.hidden:false 的第一个
                 // rootPath未做hidden判断，以后再处理
-                const MenuTree = FilterMenuTree(accessedRouters)
+                const MenuTree = FilterMenuTree(JSON.parse(JSON.stringify(accessedRouters)))
                 let RootPath = FilterMenuRootPath(MenuTree)
 
                 const replacePath = asyncRootMap.map(item => {
@@ -129,6 +131,7 @@ const actions = {
                     return item
                 })
 
+                console.log("MenuTree", MenuTree)
                 console.log("accessedRouters", accessedRouters)
                 // console.log("得到replacePath", replacePath)
                 commit('SET_REPLACE_PATH', replacePath)

@@ -60,7 +60,7 @@ export default {
         }
       }
       .el-scrollbar__bar.is-horizontal{
-        //display: none
+        display: none
       }
     }
   }
