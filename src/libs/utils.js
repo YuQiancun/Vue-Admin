@@ -67,3 +67,11 @@ export function objectSetNull(obj = {}, val = null, jump = null) {
         if(!(arr.indexOf(key) >= 0)) obj[key] = val
     }
 }
+
+/**
+ * @param {string} path
+ * @returns {Boolean}
+ */
+export function isExternal(path) {
+    return /^(https?:|mailto:|tel:)/.test(path)
+}

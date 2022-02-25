@@ -6,6 +6,7 @@
 
 <style>
 #app {
+  min-width: 700px;
   position: relative;
   height: 100vh;
 }

@@ -37,7 +37,9 @@ const actions = {
     LoginOut({ commit }) {
         return new Promise(resolve => {
             commit("CLEAR_TOKEN")
-            resolve()
+            setTimeout(() => {
+                resolve()
+            }, 3000)
         })
     }
 }

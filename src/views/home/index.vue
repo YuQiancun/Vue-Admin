@@ -1,7 +1,6 @@
 <template>
   <div class="home">
     <div style="height: 50%">AAA</div>
-
     <div v-for="i in 1" :key="i">
       <hr>
       about

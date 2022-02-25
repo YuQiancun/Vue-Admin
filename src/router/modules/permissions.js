@@ -5,7 +5,7 @@ const permissions = {
     name: 'Permissions',
     component: Layout,
     redirect: '/permissions/menuManage',
-    meta: {title: 'Setting', singlePage: true, breadcrumb: false},
+    meta: {title: 'Setting', breadcrumb: false},
     children: [{
         path: 'menuManage',
         name: 'MenuManage',
