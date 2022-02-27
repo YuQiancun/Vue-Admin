@@ -22,9 +22,18 @@ function FilterMenuRoles(roles = [], menu = {}, redirect = []) {
                 let subMenu = menu[item.name.toLowerCase()]
                 let redirectPath = JSON.parse(JSON.stringify(redirect))
                 redirectPath.push(subMenu.path.replace(/\//, ''))
+
+                // 递归children
                 subMenu.children = FilterMenuRoles(item.children, toEnumeration(subMenu.children, "name", str => String(str).toLowerCase()), redirectPath)
-                subMenu.children.length > 0 && (subMenu.redirect = "/".concat(redirectPath.join("/"), "/", subMenu.children[0].path))
-                subMenu.children.length === 0 && delete subMenu.redirect
+
+                // Start： children > hidden: false 重定向到顺位第一children， 如果 children > hidden: true 则删除重定向 不删除会死循环
+                // subMenu.children.length > 0 && (subMenu.redirect = "/".concat(redirectPath.join("/"), "/", subMenu.children[0].path))
+                // delete subMenu.redirect
+                let MenuTree = FilterMenuTree(JSON.parse(JSON.stringify(subMenu.children || [])))
+                MenuTree.length ? (subMenu.redirect = "/".concat(redirectPath.join("/"), "/", MenuTree[0].path)) : delete subMenu.redirect
+                // END
+
+                // 合并Meta标签
                 FilterMenuMeta(item, subMenu)
                 arr.push(subMenu)
             } else {
@@ -41,29 +50,36 @@ function FilterMenuRoles(roles = [], menu = {}, redirect = []) {
 // 过滤隐藏，和只显示子类的页面路径
 function FilterMenuTree(Menu) {
     let MenuTree = []
-    Menu.forEach(item => {
-        /**
-         * 1. 没有meta 不寻找根路径
-         * 2. 有子类寻找子类，没有子类直接返回一级根路径
-         * 2.1 有children 且 showSub为false 往下寻找第一位
-         */
-        if(item.meta && !item.meta.hidden) {
-            if(item.children && !item.meta.showSub) {
-                item.children = FilterMenuTree(item.children || [])
-                MenuTree.push(item)
-            } else if(item.meta.showSub) {
-                // 先查找到指定Name的子元素，如果没有取顺位第一
-                const SubMenuName = item.meta.showSubName
-                let SubMenu = item.children.filter((sub, index) => {
-                    return SubMenuName ? (sub.name === SubMenuName) : (index === 0)
-                })
-                item.children = FilterMenuTree(SubMenu)
-                MenuTree.push(item)
-            } else {
-                MenuTree.push(item)
+    try {
+        Menu.forEach(item => {
+            /**
+             * 1. 没有meta 不寻找根路径
+             * 2. 有子类寻找子类，没有子类直接返回一级根路径
+             * 2.1 有children 且 showSub为false 往下寻找第一位
+             */
+            if(item.meta && !item.meta.hidden) {
+                if(item.children && !item.meta.showSub) {
+                    item.children = FilterMenuTree(item.children || [])
+                    MenuTree.push(item)
+                } else if(item.meta.showSub) {
+                    // 先查找到指定Name的子元素，如果没有取顺位第一
+                    const SubMenuName = item.meta.showSubName
+                    let SubMenu = item.children.filter((sub, index) => {
+                        return SubMenuName ? (sub.name === SubMenuName) : (index === 0)
+                    })
+                    item.children = FilterMenuTree(SubMenu)
+                    MenuTree.push(item)
+                } else {
+                    MenuTree.push(item)
+                }
             }
-        }
-    })
+        })
+    }
+    catch(e)
+    {
+        console.log(e)
+    }
+
     return MenuTree
 }
 
@@ -134,9 +150,9 @@ const actions = {
                 // console.log("MenuTree", MenuTree)
                 // console.log("accessedRouters", accessedRouters)
                 // console.log("得到replacePath", replacePath)
-                commit('SET_REPLACE_PATH', replacePath)
-                commit('SET_DEFAULT_ROUTES')
-                commit('SET_ROUTES', accessedRouters)
+                commit("SET_REPLACE_PATH", replacePath)
+                commit("SET_DEFAULT_ROUTES")
+                commit("SET_ROUTES", accessedRouters)
 
                 resolve()
             // }, 1000)
