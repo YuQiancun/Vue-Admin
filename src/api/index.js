@@ -21,6 +21,19 @@ export default {
             })
         }
     },
+    uploadFile({headers = {'Content-Type': "multipart/form-data"}, method = null, url = null, data = null}){
+        if(!url) {
+            console.error('参数错误post(String,Object)')
+            return Promise.reject('参数错误post(String,Object)')
+        } else {
+            return http.httpAREA.uploadFile({
+                headers: headers,
+                url: url,
+                method: method || 'post',
+                data
+            })
+        }
+    },
     test(data = {}) {
         return http.request({
             url: '/login',

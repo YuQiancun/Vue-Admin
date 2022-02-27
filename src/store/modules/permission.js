@@ -131,8 +131,8 @@ const actions = {
                     return item
                 })
 
-                console.log("MenuTree", MenuTree)
-                console.log("accessedRouters", accessedRouters)
+                // console.log("MenuTree", MenuTree)
+                // console.log("accessedRouters", accessedRouters)
                 // console.log("得到replacePath", replacePath)
                 commit('SET_REPLACE_PATH', replacePath)
                 commit('SET_DEFAULT_ROUTES')

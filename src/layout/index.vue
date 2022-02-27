@@ -66,3 +66,10 @@ export default {
   }
 }
 </style>
+
+<style lang="scss">
+.body_page{
+  padding: 12px;
+  box-sizing: border-box;
+}
+</style>

@@ -28,16 +28,16 @@ export const constantRouterMap = [
   {
     path: '/notPermissions',
     name: 'NotPermissions',
+    component: Layout,
     meta: { title: '无权限', hidden: true},
     redirect: '/notPermissions/np',
-    component: Layout,
     children: [
-        {
-          path: '/notPermissions',
-          name: 'NotPermissions',
-          meta: { title: '无权限', hidden: true},
-          component: () => import("@/views/error-page/permissions"),
-        }
+      {
+        path: 'np',
+        name: 'Np',
+        meta: { title: '无权限', hidden: false},
+        component: () => import("@/views/error-page/permissions"),
+      }
     ]
   },
 ]

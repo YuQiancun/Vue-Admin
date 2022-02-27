@@ -4,7 +4,7 @@
       <template v-if="MenuItem.children && !MenuItem.meta.showSub">
         <el-submenu :index="resolvePath(MenuItem)">
           <template slot="title">
-            <i class="el-icon-" :class="MenuItem.meta.icon || ''"/>
+            <i class="" :class="MenuItem.meta.icon || ''"/>
             <span>{{ MenuItem.meta ? (MenuItem.meta.reTitle || MenuItem.meta.title) : (MenuItem.path || MenuItem.path) }}</span>
           </template>
           <LayoutMenuItem v-for="(item, index) in MenuItem.children" :key="index" :MenuItem="item" :base-path="resolvePath(MenuItem)"/>
@@ -15,7 +15,7 @@
       </template>
       <template v-else>
         <el-menu-item :index="resolvePath(MenuItem)">
-          <i class="el-icon-" :class="MenuItem.meta.icon || ''" />
+          <i class="" :class="MenuItem.meta.icon || ''" />
           <span slot="title">{{ MenuItem.meta ? (MenuItem.meta.reTitle || MenuItem.meta.title) : MenuItem.path }}</span>
         </el-menu-item>
       </template>

@@ -14,10 +14,16 @@ class HttpRequest {
         }
     }
     setConfig() {
-        let token = localStorage.getItem('ca_oa_user')
+        let token = localStorage.getItem('token')
         let Authorization = {}
-        if(token) {
-            Authorization = JSON.parse(token)
+        try {
+            if(token) {
+                Authorization = JSON.parse(token)
+            }
+        }
+        catch(e)
+        {
+            console.log(e)
         }
         //请求配置信息
         const config = {
@@ -25,9 +31,9 @@ class HttpRequest {
             // baseURL: this.baseURL,
             responseType:'json',
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
+                // 'Content-Type': 'application/x-www-form-urlencoded',
                 // 'Content-Type': 'multipart/form-data',
-                // 'Content-Type': 'application/json',
+                'Content-Type': 'application/json',
                 // add token code
                 Authorization: 'Bearer ' + Authorization.token
             },
@@ -105,6 +111,50 @@ class HttpRequest {
                     Vue.prototype.$message.success('请重新登录')
                     $store.dispatch('logout')
                     router.push({ name: 'Login', query: {redirect: currentRoute}})
+                } else {
+                    reject(data)
+                    Vue.prototype.$message({
+                        type: 'error',
+                        duration: 5000,
+                        message: data.msg
+                    })
+                }
+            }).catch(e => {
+                reject(e)
+            })
+        })
+    }
+    uploadFile(optionsIn) {
+        const instance = axios.create()
+        let options = this.setConfig()
+        if (optionsIn.headers) {
+            Object.assign(options.headers, optionsIn.headers)
+        } else {
+            optionsIn.headers = options.headers
+        }
+        Object.assign(options, optionsIn)
+        this.interceptors(instance)
+        const request = instance(options)
+        console.log("options", options)
+        return new Promise((resolve,reject) => {
+            request.then(({ data }) => {
+                if(Object.prototype.toString.call(data) === '[object String]') {
+                    if(/flag: expiration/.test(data)) {
+                        m && m.close()
+                        reject(data)
+                        m = Vue.prototype.$message.error("请重新登录")
+                        //  无权限判断 进行跳转 router
+                        $store.dispatch('logout')
+                        router.push({name: 'Login'})
+                    }
+                } else if(/^0|60019$/.test(data.code)){
+                    resolve(data.data)
+                } else if(data.code === 401){
+                    reject(data)
+                    //  无权限判断 进行跳转 router
+                    Vue.prototype.$message.success('请重新登录')
+                    $store.dispatch('logout')
+                    router.push({ name: 'Login'})
                 } else {
                     reject(data)
                     Vue.prototype.$message({
