@@ -9,18 +9,6 @@
           <LayoutMenuItem :MenuItem="item" />
         </div>
       </el-menu>
-
-<!--      <div v-for="(item, index) in this.$store.getters.routers" :key="index">-->
-<!--        <template v-if="item.meta && !item.meta.hidden">-->
-<!--          <router-link :to="item.path">{{ item.meta.reTitle || item.meta.title }}</router-link>-->
-<!--&lt;!&ndash;          <pre>&ndash;&gt;-->
-<!--&lt;!&ndash;            {{ item.redirect }}&ndash;&gt;-->
-<!--&lt;!&ndash;            {{ item.children }}&ndash;&gt;-->
-<!--&lt;!&ndash;          </pre>&ndash;&gt;-->
-<!--&lt;!&ndash;          <hr>&ndash;&gt;-->
-<!--&lt;!&ndash;          <br>&ndash;&gt;-->
-<!--        </template>-->
-<!--      </div>-->
     </div>
   </div>
 </template>
@@ -50,15 +38,75 @@ export default {
     routeActive() {
       const route = this.$route
       this.defaultActive = route.path
-    },
-    curActive() {
-      console.log(this.$route)
-      return "/home"
     }
   }
 }
+
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+/deep/ .el-menu-item{
+  color: $LayoutMenuItemColorDefault;
+  background-color: $LayoutMenuItemBackDefault;
 
+  // 放弃渐变方案，渐变无法使用 transition 过度
+  //background:linear-gradient(to left,$LayoutMenuItemBackDefault 0%,$LayoutMenuItemBackDefault 0,$LayoutMenuItemBackDefault 0,$LayoutMenuItemBackDefault 100%);
+  transition: all .2s;
+  //&:hover{
+  //  background:linear-gradient(to left,$LayoutMenuItemBackActive 0%,$LayoutMenuItemBackActive 50%,$LayoutMenuItemBackActive 51%,$LayoutMenuItemBackActive 100%);
+  //  transition: all .2s;
+  //}
+  &:after{
+    position: absolute;
+    top: 50%;
+    right: 0;
+    content: "";
+    width: 4px;
+    height: 0;
+    background-color: $LayoutMenuItemActiveAfter;
+    transition: all .2s;
+  }
+  &.is-active{
+    color: $LayoutMenuItemColorActive;
+    background-color: $LayoutMenuItemBackActive;
+    transition: all .2s;
+    &:after{
+      top: 0;
+      width: 4px;
+      height: 100%;
+      transition: all .2s;
+    }
+  }
+}
+
+/deep/ .el-submenu{
+  & > .el-submenu__title{
+    color: $LayoutMenuSubMenuColorDefault;
+    background-color: $LayoutMenuSubMenuBackDefault;
+    position: relative;
+    &:after{
+      position: absolute;
+      top: 50%;
+      right: 0;
+      content: "";
+      width: 4px;
+      height: 0;
+      background-color: $LayoutMenuSubMenuActiveAfter;
+      transition: all .8s;
+    }
+  }
+
+  &.is-active{
+    & > .el-submenu__title{
+      color: $LayoutMenuSubMenuColorActive;
+      background-color: $LayoutMenuSubMenuBackActive;
+      transition: all .8s;
+      &:after{
+        top: 0;
+        height: 100%;
+        transition: all .8s;
+      }
+    }
+  }
+}
 </style>

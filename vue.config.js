@@ -1,5 +1,12 @@
 module.exports = {
     lintOnSave: true, //开启关闭eslint
+    css: {
+        loaderOptions: {
+            sass: {
+                prependData: '@import "@/assets/style/group.scss";' // @import "URL";@import "URL";*n
+            }
+        }
+    },
     devServer: {
         // proxy: {
         //     [process.env.VUE_APP_BASE_API]: { // 配置跨域的名字

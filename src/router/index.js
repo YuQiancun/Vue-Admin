@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import store from "@/store"
 
 /* Layout */
-// import Layout from '@/layout/index.vue'
+import Layout from '@/layout/index.vue'
 
 Vue.use(VueRouter)
 
@@ -13,7 +13,7 @@ export const asyncRootMap = [
   {
     path: '/',
     name: 'Root',
-    redirect: '/login',
+    redirect: '/notPermissions',
     meta: { title: '重定向'},
   },
 ]
@@ -24,6 +24,21 @@ export const constantRouterMap = [
     name: 'Login',
     meta: { title: '登录', hidden: true},
     component: () => import('@/views/login'),
+  },
+  {
+    path: '/notPermissions',
+    name: 'NotPermissions',
+    meta: { title: '无权限', hidden: true},
+    redirect: '/notPermissions/np',
+    component: Layout,
+    children: [
+        {
+          path: '/notPermissions',
+          name: 'NotPermissions',
+          meta: { title: '无权限', hidden: true},
+          component: () => import("@/views/error-page/permissions"),
+        }
+    ]
   },
 ]
 
@@ -93,7 +108,11 @@ router.beforeEach((to,from,next) => {
             //
             // router.addRoutes(store.getters.defaultRouters) // 动态添加可访问路由表 - ErrorPages
             //
-            router.addRoutes(route) // 动态添加可访问路由表
+            // addRoutes() 在 Vue Router 4中被删除, 改用 addRoute()
+            // router.addRoutes(route) // 动态添加可访问路由表
+            route.forEach(item => {
+              router.addRoute(item)
+            })
             next({...to, replace: true})
           })
 

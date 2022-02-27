@@ -5,7 +5,7 @@ const about = {
     name: 'About',
     component: Layout,
     redirect: '/about/we',
-    meta: {title: 'About', breadcrumb: false, role: ['admin', 'super_editor']},
+    meta: {title: 'About', breadcrumb: false},
     children: [{
         path: 'we',
         name: 'We',

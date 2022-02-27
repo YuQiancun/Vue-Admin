@@ -20,6 +20,12 @@ const map = {
             component: () => import("@/views/map/BMap"),
             children: [
                 {
+                    path: 'camap',
+                    name: 'CAMap',
+                    meta: { title: '首页'},
+                    component: () => import("@/views/map/BMap"),
+                },
+                {
                     path: 'cmap',
                     name: 'CMap',
                     meta: { title: '首页'},
