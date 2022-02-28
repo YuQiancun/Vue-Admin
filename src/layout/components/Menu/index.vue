@@ -49,6 +49,10 @@ export default {
   color: $LayoutMenuItemColorDefault;
   background-color: $LayoutMenuItemBackDefault;
 
+  height: 42px;
+  line-height: 42px;
+  margin: 4px 0;
+  box-sizing: border-box;
   // 放弃渐变方案，渐变无法使用 transition 过度
   //background:linear-gradient(to left,$LayoutMenuItemBackDefault 0%,$LayoutMenuItemBackDefault 0,$LayoutMenuItemBackDefault 0,$LayoutMenuItemBackDefault 100%);
   transition: all .2s;
@@ -84,6 +88,12 @@ export default {
     color: $LayoutMenuSubMenuColorDefault;
     background-color: $LayoutMenuSubMenuBackDefault;
     position: relative;
+
+    height: 42px;
+    line-height: 42px;
+    margin: 4px 0;
+    box-sizing: border-box;
+
     &:after{
       position: absolute;
       top: 50%;
@@ -94,6 +104,13 @@ export default {
       background-color: $LayoutMenuSubMenuActiveAfter;
       transition: all .8s;
     }
+  }
+
+  & .el-menu-item{
+    height: 42px;
+    line-height: 42px;
+    margin: 4px 0;
+    box-sizing: border-box;
   }
 
   &.is-active{
