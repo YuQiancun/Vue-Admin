@@ -10,42 +10,14 @@ const map = {
         {
             path: 'amap',
             name: 'AMap',
-            meta: { title: '首页'},
+            meta: { title: 'AMap'},
             component: () => import("@/views/map/AMap"),
         },
         {
             path: 'bmap',
             name: 'BMap',
-            meta: { title: '首页'},
+            meta: { title: 'BMap'},
             component: () => import("@/views/map/BMap"),
-            children: [
-                {
-                    path: 'camap',
-                    name: 'CAMap',
-                    meta: { title: '首页'},
-                    component: () => import("@/views/map/BMap"),
-                },
-                {
-                    path: 'cmap',
-                    name: 'CMap',
-                    meta: { title: '首页'},
-                    component: () => import("@/views/map/CMap"),
-                },
-                {
-                    path: 'cbmap',
-                    name: 'CBMap',
-                    meta: { title: '首页'},
-                    component: () => import("@/views/map/BMap"),
-                    children: [
-                        {
-                            path: 'ccbmap',
-                            name: 'CCBMap',
-                            meta: { title: '首页'},
-                            component: () => import("@/views/map/CMap"),
-                        },
-                    ]
-                }
-            ]
         }
     ]
 }

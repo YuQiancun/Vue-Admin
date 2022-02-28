@@ -81,8 +81,5 @@ export default {
 </style>
 
 <style lang="scss">
-.body_page{
-  //padding: 12px;
-  box-sizing: border-box;
-}
+@import "../assets/style/body_page_style";
 </style>

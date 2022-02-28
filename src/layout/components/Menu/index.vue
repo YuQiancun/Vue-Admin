@@ -91,7 +91,7 @@ export default {
 
     height: 42px;
     line-height: 42px;
-    margin: 4px 0;
+    margin: 4px 0 0 0;
     box-sizing: border-box;
 
     &:after{
@@ -110,6 +110,7 @@ export default {
     height: 42px;
     line-height: 42px;
     margin: 4px 0;
+    //margin: 0 0 4px 0;
     box-sizing: border-box;
   }
 

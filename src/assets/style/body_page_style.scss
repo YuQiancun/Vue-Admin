@@ -1,0 +1,5 @@
+.body_page{
+  height: calc(100vh - #{ $LayoutHeaderHeight });
+  padding: 12px;
+  box-sizing: border-box;
+}

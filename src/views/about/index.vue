@@ -1,38 +1,36 @@
 <template>
-  <div class="about">
-    <div style="height: 50%">AAA</div>
-
-    <div v-for="i in 11" :key="i">
-      <hr>
-      about
-      about
-      <hr>
-      about
-      <hr>
+  <div class="body_page about">
+    <div class="body_box about_box">
+      <el-card class="box-card">
+        <div slot="header" class="clearfix">
+          <span>About</span>
+<!--          <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>-->
+        </div>
+        <div v-for="o in 1" :key="o" class="text item">
+          {{ "VueAdmin Demo 项目" }}
+        </div>
+      </el-card>
     </div>
-    aboutAAAAAAAAAAAAAAAAAA4
-    <hr>
-    aboutAAAAAAAAAAAAAAAAAA3
-    <hr>
-    aboutAAAAAAAAAAAAAAAAAA2
-    <hr>
-    aboutAAAAAAAAAAAAAAAAAA1
-    <hr>
-    aboutAAAAAAAAAAAAAAAAAA0
-    <hr>
   </div>
 </template>
 
 <script>
 export default {
-  name: "index"
+  name: "About"
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .about{
+  .about_box{
+    padding: 12px;
+    box-sizing: border-box;
+  }
   width: 100%;
   min-height: 100%;
-  background-color: rgb(210, 145, 145);
+  .box-card{
+    width: 400px;
+    margin: 200px auto;
+  }
 }
 </style>
