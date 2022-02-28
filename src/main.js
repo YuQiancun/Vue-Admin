@@ -5,6 +5,7 @@ import store from './store'
 
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+// 裁剪组件
 import VueCropper from 'vue-cropper'
 
 Vue.use(ElementUI);

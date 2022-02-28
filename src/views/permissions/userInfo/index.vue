@@ -1,6 +1,7 @@
 <template>
   <div class="body_page user_info">
-    <div class="body_box user_info_box">
+    <el-scrollbar wrap-class="scrollbar-wrapper">
+      <div class="body_box user_info_box">
       <!--DOM模块-->
       <!--
           将auto-upload设置为false是为了关闭默认上传，
@@ -18,6 +19,7 @@
         </el-upload>
       </div>
     </div>
+    </el-scrollbar>
     <div class="dialog_box">
 
       <!--我将裁剪的Dom放在了一个dialog弹框中-->
@@ -127,11 +129,18 @@ export default {
 
 <style lang="scss" scoped>
 .user_info{
-  height: 100%;
+  height: calc(100vh - #{ $LayoutHeaderHeight });
+  background-color: rgba(66, 185, 131, 0.15);
   overflow-y: hidden;
-  .user_info_box{
-    background-color: #42b983;
+  padding: 12px;
+  box-sizing: border-box;
+  /deep/ .el-scrollbar__view{
+    min-height: 100%;
     height: 100%;
+  }
+  .user_info_box{
+    background-color: rgba(66, 185, 131, 0.15);
+    min-height: 100%;
   }
 }
 .cropper-content {

@@ -11,7 +11,9 @@
       </el-aside>
       <el-main class="layout_main">
         <el-scrollbar wrap-class="scrollbar-wrapper">
-          <router-view />
+          <transition name="fade" mode="out-in">
+            <router-view />
+          </transition>
         </el-scrollbar>
       </el-main>
     </el-container>
@@ -40,7 +42,10 @@ export default {
   .layout_header{
   }
   .layout_container{
-    height: calc(100vh - 60px);
+    height: calc(100vh - #{ $LayoutHeaderHeight });
+    .layout_aside{
+      background-color: $LayoutAsideBack;
+    }
     .layout_main{
       padding: 0;
       margin: 0;
@@ -65,11 +70,19 @@ export default {
     }
   }
 }
+
+.fade-enter-active, .fade-leave-active {
+  transition: all .25s;
+}
+.fade-enter, .fade-leave-to {
+  transform: translateX(2%);
+  opacity: 0;
+}
 </style>
 
 <style lang="scss">
 .body_page{
-  padding: 12px;
+  //padding: 12px;
   box-sizing: border-box;
 }
 </style>

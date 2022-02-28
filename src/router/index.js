@@ -45,22 +45,21 @@ export const constantRouterMap = [
 //所有权限通用路由表
 //固定Error Page
 export const constantRouterErrorMap = [
-
   //  Layout内部显示
   {
     path: '/error-page',
-    name: 'ErrorPage',
+    name: 'InnerErrorPage',
     component: Layout,
     redirect: "/error-page/404",
     children: [
       {
         path: '404',
-        name: '404',
+        name: 'Inner404',
         component: () => import('@/views/error-page/404'),
       },
       {
         path: '401',
-        name: '401',
+        name: 'Inner401',
         component: () => import('@/views/error-page/401'),
       }
     ]
