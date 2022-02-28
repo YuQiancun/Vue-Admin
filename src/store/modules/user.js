@@ -2,9 +2,11 @@
  *
  * @type {{userInfo: {}, isLogin: boolean, token: (string|null)}}
  */
+import Cookies from 'js-cookie'
 
 const state = {
-    token: localStorage.getItem("token") || null,
+    // token: localStorage.getItem("token") || null,
+    token: Cookies.get("token") || null,
     userInfo: {},
     isLogin: false
 }
@@ -12,13 +14,14 @@ const state = {
 const mutations = {
     SET_TOKEN(state, data) {
         // 存储
-        localStorage.setItem("token", data);
+        // localStorage.setItem("token", data);
+        Cookies.set("token", data, {expires: new Date(new Date().getTime() + 8 * 60 * 60 * 1000)})
         state.token = data
         state.isLogin = true
     },
     CLEAR_TOKEN(state) {
         // 清除
-        localStorage.clear()
+        Cookies.remove("token")
         state.token = null
         state.isLogin = false
     }

@@ -2,9 +2,13 @@ import axios from 'axios'
 import router from '@/router'
 import Vue from 'vue'
 import $store from '@/store'
+import Cookies from "js-cookie";
 
 let m = null
 let err = null
+
+let uploadFileM = null
+
 class HttpRequest {
     constructor(url) {
         this.baseURL = url
@@ -14,7 +18,8 @@ class HttpRequest {
         }
     }
     setConfig() {
-        let token = localStorage.getItem('token')
+        // let token = localStorage.getItem('token')
+        let token = Cookies.get('token')
         let Authorization = {}
         try {
             if(token) {
@@ -135,14 +140,13 @@ class HttpRequest {
         Object.assign(options, optionsIn)
         this.interceptors(instance)
         const request = instance(options)
-        console.log("options", options)
         return new Promise((resolve,reject) => {
             request.then(({ data }) => {
                 if(Object.prototype.toString.call(data) === '[object String]') {
                     if(/flag: expiration/.test(data)) {
-                        m && m.close()
+                        uploadFileM && uploadFileM.close()
                         reject(data)
-                        m = Vue.prototype.$message.error("请重新登录")
+                        uploadFileM = Vue.prototype.$message.error("请重新登录")
                         //  无权限判断 进行跳转 router
                         $store.dispatch('logout')
                         router.push({name: 'Login'})

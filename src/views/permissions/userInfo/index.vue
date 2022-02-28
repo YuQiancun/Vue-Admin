@@ -8,16 +8,19 @@
           过后将会使用单独的上传进行上传
           on-change事件获取当前upload组件的文件缓存
       -->
-      <div v-for="i in 4" :key="i">
+<!--      <div v-for="i in 4" :key="i">-->
+
         <el-upload
-            action=''
             class="avatar-uploader"
+            action="https://jsonplaceholder.typicode.com/posts/"
+            :show-file-list="false"
             :auto-upload='false'
-            :on-change='getUploadFile'
-        >
-          <el-image style="width: 200px;height: 100px;" ></el-image>
+            :on-change='getUploadFile'>
+<!--          <img v-if="imageUrl" :src="imageUrl" class="avatar">-->
+<!--          <i v-else class="el-icon-plus avatar-uploader-icon"></i>-->
+          <i class="el-icon-plus avatar-uploader-icon" />
         </el-upload>
-      </div>
+<!--      </div>-->
     </div>
     </el-scrollbar>
     <div class="dialog_box">
@@ -64,7 +67,7 @@ export default {
       dialogVisible: false,
       fileInfo: null,
       params: {
-        video_cover: "uploadFiles"
+        video_cover: ""
       },
       option: {
         img: '', // 裁剪图片的地址
@@ -73,9 +76,9 @@ export default {
         outputType: 'jpeg', // 裁剪生成图片的格式
         canScale: true, // 图片是否允许滚轮缩放
         autoCrop: true, // 是否默认生成截图框
-        fixedBox: true, // 固定截图框大小 不允许改变
+        fixedBox: false, // 固定截图框大小 不允许改变
         fixed: true, // 是否开启截图框宽高固定比例
-        fixedNumber: [], // 截图框的宽高比例
+        fixedNumber: [1, 1], // 截图框的宽高比例
         full: true, // 是否输出原图比例的截图
         canMoveBox: true, // 截图框能否拖动
         autoCropWidth: 100, // 默认生成截图框宽度
@@ -117,7 +120,7 @@ export default {
                 {type: this.fileInfo.type} // 设置File类型的文件类型
             )
         );
-        formData.append("testData", "testData")
+        formData.append("filedir", "recognition")
         // 调用接口上传
         this.$message.success("调用")
         this.$api.uploadFile({url: '/uploadFiles', data: formData})
