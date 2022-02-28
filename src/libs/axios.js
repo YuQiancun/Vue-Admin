@@ -21,6 +21,7 @@ class HttpRequest {
         // let token = localStorage.getItem('token')
         let token = Cookies.get('token')
         let Authorization = {}
+
         try {
             if(token) {
                 Authorization = JSON.parse(token)
@@ -28,8 +29,9 @@ class HttpRequest {
         }
         catch(e)
         {
-            console.log(e)
+            Authorization = token
         }
+
         //请求配置信息
         const config = {
             baseURL: '/api',
