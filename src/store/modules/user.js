@@ -19,6 +19,9 @@ const mutations = {
         state.token = data
         state.isLogin = true
     },
+    SET_USER_INFO(state, data) {
+      state.userInfo = data
+    },
     CLEAR_TOKEN(state) {
         // 清除
         Cookies.remove("token")
@@ -31,8 +34,8 @@ const actions = {
     LoginByUsername({ commit }, res) {
         return new Promise(resolve => {
             if(res) {
-                console.log(res.token)
                 commit("SET_TOKEN", res.token)
+                commit("SET_USER_INFO", res.data)
                 resolve()
             }
         })
