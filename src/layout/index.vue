@@ -33,6 +33,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@media screen and (max-width: 1023px){
+  .layout_aside{
+    display: none;
+    //position: absolute;
+    //margin-left: -200px;
+    //z-index: 1;
+    //transform: translateX(-100%);
+  }
+}
+
 .layout{
   height: 100%;
   .el-header{
@@ -40,11 +50,13 @@ export default {
     box-shadow: 0 0 10px #e2e2e2;
   }
   .layout_header{
+    background-color: #333;
   }
   .layout_container{
     height: calc(100vh - #{ $LayoutHeaderHeight });
     .layout_aside{
       background-color: $LayoutAsideBack;
+      transition: all .3s;
     }
     .layout_main{
       padding: 0;
@@ -82,4 +94,5 @@ export default {
 
 <style lang="scss">
 @import "../assets/style/body_page_style";
+@import "../assets/style/global_media";
 </style>

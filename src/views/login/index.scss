@@ -1,0 +1,82 @@
+.login{
+  height: 100vh;
+  width: 100%;
+  transition: all .3s;
+  .login_box{
+    position: relative;
+    border: 0 solid red;
+    .module{
+      margin: 50% auto 0;
+      transform: translateY(-50%);
+      width: 700px;
+      height: 400px;
+      box-shadow: 0 0 10px #c1c1c1;
+      box-sizing: border-box;
+
+      display: flex;
+      flex-wrap: nowrap;
+
+      .img{
+        position: relative;
+        flex: 1;
+        overflow: hidden;
+        &:after{
+          background: url("back.jpg") 100% 100%/ 100% 100% no-repeat;
+          position: absolute;
+          content: "";
+          width: 100%;
+          height: 100%;
+          //background-color: rgba(0,0, 0, .1);
+          //-webkit-filter: blur(1px);
+          //-moz-filter: blur(1px);
+          //-ms-filter: blur(1px);
+          //-o-filter: blur(1px);
+          //filter: blur(1px);
+        }
+      }
+      .form{
+        width: 240px;
+        background-color: #E2E2E2;
+        transition: all .3s;
+      }
+    }
+  }
+}
+
+
+/* 小屏幕（平板，大于等于 768px） */
+@media only screen and (min-width: 768px){
+  .login{
+    background-color: red;
+    transition: all .3s;
+    .login_box{
+      padding: 0;
+      overflow: hidden;
+    }
+  }
+}
+
+/* 中等屏幕（桌面显示器，大于等于 992px） */
+
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
+  .login{
+    background-color: grey;
+    transition: all .3s;
+    .login_box{
+      padding: 0;
+      overflow: hidden;
+    }
+  }
+}
+
+/* 大屏幕（大桌面显示器，大于等于 1200px） */
+@media only screen and (min-width: 1025px) {
+  .login{
+    background-color: green;
+    transition: all .3s;
+    .login_box{
+      padding: 0;
+      overflow: hidden;
+    }
+  }
+}
