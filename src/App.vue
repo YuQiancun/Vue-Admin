@@ -1,10 +1,9 @@
 <template>
   <div id="app">
     <transition name="app" mode="out-in">
+      <Loading v-if="!$store.getters.isRoles && $route.path !== '/login'" />
       <router-view />
     </transition>
-
-<!--    {{ $store.getters.isRoles }}-->
   </div>
 </template>
 
@@ -21,6 +20,13 @@
   transition: all .5s;
 }
 .app-enter, .app-leave-to {
+  transform: scale(.95);
+  opacity: 0;
+}
+.loading-enter-active, .loading-leave-active {
+  transition: all 1s;
+}
+.loading-enter, .loading-leave-to {
   transform: scale(.95);
   opacity: 0;
 }

@@ -7,8 +7,7 @@ import Layout from '@/layout/index.vue'
 
 Vue.use(VueRouter)
 
-//所有权限通用路由表
-//如首页和登录页和一些不用权限的公用页面
+// 根路径
 export const asyncRootMap = [
   {
     path: '/',
@@ -18,6 +17,8 @@ export const asyncRootMap = [
   },
 ]
 
+//所有权限通用路由表
+//如首页和登录页和一些不用权限的公用页面
 export const constantRouterMap = [
   {
     path: '/login',
@@ -137,7 +138,6 @@ router.beforeEach((to,from,next) => {
             })
             next({...to, replace: true})
           })
-
         })
         // 请求 error =>
         // console.log(error)

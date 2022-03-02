@@ -11,6 +11,10 @@ import VueCropper from 'vue-cropper'
 Vue.use(ElementUI);
 Vue.use(VueCropper)
 
+// 全局组件
+import Loading from "@/components/Loading"
+Vue.component('Loading', Loading)
+
 import api from '@/api'
 
 Vue.prototype.$api = api

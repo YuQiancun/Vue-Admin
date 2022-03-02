@@ -26,7 +26,7 @@
     <div class="dialog_box">
 
       <!--我将裁剪的Dom放在了一个dialog弹框中-->
-      <el-dialog title="图片剪裁" :visible.sync="dialogVisible" append-to-body>
+      <el-dialog title="照片剪裁" :visible.sync="dialogVisible" append-to-body>
         <div class="cropper-content">
           <div class="cropper" style="text-align:center">
             <vueCropper
@@ -34,7 +34,7 @@
                 :img="option.img"
                 :outputSize="option.size"
                 :outputType="option.outputType"
-                :info="true"
+                :info="option.info"
                 :full="option.full"
                 :canMove="option.canMove"
                 :canMoveBox="option.canMoveBox"
