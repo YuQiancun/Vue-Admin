@@ -30,14 +30,13 @@ export default {
     }
   },
   created() {
-    
+
   },
   mounted() {
 
   },
   methods: {
     onChange(file) {
-      console.log(file)
       this.fileData = file
       this.readExcel(this.fileData)
       return false
@@ -52,10 +51,10 @@ export default {
             try {
               const data = ev.target.result
               console.log("data", data)
-              const workbook = XLSX.read(data, {
-                type: 'binary'
-              });
-              console.log(workbook)
+              // const workbook = XLSX.read(data, {
+              //   type: 'binary'
+              // });
+              // console.log(workbook)
             }
             catch (e) {
               console.log(e)
