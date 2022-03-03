@@ -84,11 +84,24 @@ export const constantRouterErrorMap = [
     component: () => import('@/views/error-page/401'),
   }
 ]
-const router = new VueRouter({
+// const router = new VueRouter({
+//   mode: 'history',
+//   base: process.env.BASE_URL,
+//   routes: constantRouterMap
+// })
+
+export const createRouter = (concatRouter = []) => new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes: constantRouterMap
+  routes: constantRouterMap.concat(...concatRouter)
 })
+
+const router = createRouter()
+
+export function resetRouter(concatRouter) {
+  const newRouter = createRouter(concatRouter)
+  router.matcher = newRouter.matcher // reset router
+}
 
 // export const createRouter = routes => new VueRouter({
 //   mode: 'history',

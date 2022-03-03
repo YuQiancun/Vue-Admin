@@ -41,10 +41,11 @@ const actions = {
     },
     LoginOut({ commit }) {
         return new Promise(resolve => {
+            commit("CLEAR_IS_ROLES")
             commit("CLEAR_TOKEN")
             setTimeout(() => {
                 resolve()
-            }, 3000)
+            }, 1500)
         })
     }
 }

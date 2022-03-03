@@ -8,19 +8,20 @@
           过后将会使用单独的上传进行上传
           on-change事件获取当前upload组件的文件缓存
       -->
-<!--      <div v-for="i in 4" :key="i">-->
-
         <el-upload
             class="avatar-uploader"
             action="https://jsonplaceholder.typicode.com/posts/"
             :show-file-list="false"
             :auto-upload='false'
             :on-change='getUploadFile'>
-<!--          <img v-if="imageUrl" :src="imageUrl" class="avatar">-->
-<!--          <i v-else class="el-icon-plus avatar-uploader-icon"></i>-->
+          <!--          <img v-if="imageUrl" :src="imageUrl" class="avatar">-->
+          <!--          <i v-else class="el-icon-plus avatar-uploader-icon"></i>-->
           <i class="el-icon-plus avatar-uploader-icon" />
         </el-upload>
-<!--      </div>-->
+      <div v-for="i in 124" :key="i">
+        <hr>
+        <br>
+      </div>
     </div>
     </el-scrollbar>
     <div class="dialog_box">

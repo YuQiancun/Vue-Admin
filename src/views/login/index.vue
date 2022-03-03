@@ -14,6 +14,8 @@
 
 <script>
 
+import { resetRouter } from "@/router";
+
 export default {
   name: "index",
   data() {
@@ -35,7 +37,7 @@ export default {
         url: '/api/login'
       }
       this.$api.post(params).then(res => {
-        console.log(res)
+        resetRouter()
         this.$store.dispatch("LoginByUsername", res).then(() => {
           this.$message.success(this.$store.getters.token)
           this.$router.push({ path: '/' }); //登录成功之后重定向到首页

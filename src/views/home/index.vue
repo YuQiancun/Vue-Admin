@@ -8,7 +8,11 @@
 
 <script>
 export default {
-  name: "index"
+  name: "Home",
+  data() {
+    return {
+    }
+  }
 }
 </script>
 

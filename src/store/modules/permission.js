@@ -119,6 +119,11 @@ const mutations = {
     },
     SET_REPLACE_PATH(state, replaceRoute) {
         state.replaceRouters = replaceRoute
+    },
+
+    // CLEAR
+    CLEAR_IS_ROLES(state) {
+        state.isRoles = false
     }
 }
 
@@ -134,7 +139,7 @@ const actions = {
                 // accessedRouters = asyncRoutesArr.filter(route => {
                 //     return !/^A$/.test(route.name)
                 // })
-                accessedRouters = FilterMenuRoles(roles, asyncRoutes)
+                accessedRouters = FilterMenuRoles(roles,Object.assign(asyncRoutes))
                 // console.log("accessedRouters", accessedRouters)
                 commit('SET_ROLES', roles)
                 // 如果没有Home首页访问权限，则获取顺序第一个的首页 meta.hidden:false 的第一个
@@ -146,6 +151,9 @@ const actions = {
                     (RootPath.length && item.name === "Root") && (item.redirect = RootPath[0])
                     return item
                 })
+
+                console.log("accessedRouters", accessedRouters)
+                console.log("asyncRoutes", asyncRoutes)
 
                 // console.log("MenuTree", MenuTree)
                 // console.log("accessedRouters", accessedRouters)

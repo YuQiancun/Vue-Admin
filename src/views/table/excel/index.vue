@@ -1,8 +1,22 @@
 <template>
   <div class="excel">
     <div class="excel_box">
-      <div class="excel_body">
-        <div class="body_header">
+      <div class="excel_header">
+
+        <div>
+          <el-upload
+              action=""
+              :on-change="onChange"
+              accept=".xlsx,.xls"
+              :auto-upload="false"
+              :show-file-list="false"
+              :file-list="fileList">
+            <el-button size="small" type="primary">点击上传</el-button>
+            <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+          </el-upload>
+        </div>
+        <el-button @click="onExcel">onExcel</el-button>
+        <div class="header_tabs">
           <el-tabs v-model="activeName">
             <el-tab-pane
               v-for="(item, index) in workbook.SheetNames || []"
@@ -12,35 +26,22 @@
             />
           </el-tabs>
         </div>
-        <div class="body_content">
+      </div>
+      <div class="excel_content">
           <el-table
               :data="(workBookSheet[activeName] || {})['body'] || []"
               style="width: 100%"
-              height="250">
+              height="100%">
             <el-table-column
                 v-for="(item, index) in ((workBookSheet[activeName] || {})['body'] || [])[0]"
                 fixed
                 :prop="index"
                 :label="index"
-                width="150"
+                :key="item"
             />
           </el-table>
         </div>
-      </div>
     </div>
-    <div>
-      <el-upload
-          action=""
-          :on-change="onChange"
-          accept=".xlsx,.xls"
-          :auto-upload="false"
-          :show-file-list="false"
-          :file-list="fileList">
-        <el-button size="small" type="primary">点击上传</el-button>
-        <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
-      </el-upload>
-    </div>
-    <el-button @click="onExcel">onExcel</el-button>
   </div>
 </template>
 
@@ -163,5 +164,27 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.excel{
+  position: relative;
+  height: calc(100vh - #{ $LayoutHeaderHeight });
+  padding: 12px;
+  box-sizing: border-box;
+  .excel_box{
+    height: 0;
+    min-height: 100%;
+    padding: 12px;
+    box-sizing: border-box;
+    background-color: white;
+    .excel_header{
+      height: 160px;
+      padding: 12px;
+      box-sizing: border-box;
+    }
+    .excel_content{
+      height: 100%;
+      min-height: 100%;
+      background-color: #2d2f33;
+    }
+  }
+}
 </style>

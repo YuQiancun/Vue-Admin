@@ -53,6 +53,10 @@ export default {
     background-color: #333;
   }
   .layout_container{
+    width: 100%;
+    max-width: 1920px;
+    min-width: 325px;
+    margin: 0 auto;
     height: calc(100vh - #{ $LayoutHeaderHeight });
     .layout_aside{
       background-color: $LayoutAsideBack;
