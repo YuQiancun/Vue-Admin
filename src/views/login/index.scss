@@ -4,6 +4,7 @@
   transition: all .3s;
   .login_box{
     position: relative;
+<<<<<<< Updated upstream
     width: 100%;
     height: 100%;
     display: flex;
@@ -13,6 +14,12 @@
     .module{
       //margin: 50% auto 0;
       //transform: translateY(-50%);
+=======
+    border: 0 solid red;
+    .module{
+      margin: 50% auto 0;
+      transform: translateY(-50%);
+>>>>>>> Stashed changes
       width: 700px;
       height: 400px;
       box-shadow: 0 0 10px #c1c1c1;
@@ -49,6 +56,7 @@
 }
 
 
+<<<<<<< Updated upstream
 ///* 小屏幕（平板，大于等于 768px） */
 //@media only screen and (min-width: 768px){
 //  .login{
@@ -85,3 +93,41 @@
 //    }
 //  }
 //}
+=======
+/* 小屏幕（平板，大于等于 768px） */
+@media only screen and (min-width: 768px){
+  .login{
+    background-color: red;
+    transition: all .3s;
+    .login_box{
+      padding: 0;
+      overflow: hidden;
+    }
+  }
+}
+
+/* 中等屏幕（桌面显示器，大于等于 992px） */
+
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
+  .login{
+    background-color: grey;
+    transition: all .3s;
+    .login_box{
+      padding: 0;
+      overflow: hidden;
+    }
+  }
+}
+
+/* 大屏幕（大桌面显示器，大于等于 1200px） */
+@media only screen and (min-width: 1025px) {
+  .login{
+    background-color: green;
+    transition: all .3s;
+    .login_box{
+      padding: 0;
+      overflow: hidden;
+    }
+  }
+}
+>>>>>>> Stashed changes

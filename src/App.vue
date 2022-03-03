@@ -23,6 +23,7 @@
   transform: scale(.95);
   opacity: 0;
 }
+<<<<<<< Updated upstream
 .loading-enter-active, .loading-leave-active {
   transition: all 1s;
 }
@@ -30,4 +31,6 @@
   transform: scale(.95);
   opacity: 0;
 }
+=======
+>>>>>>> Stashed changes
 </style>
