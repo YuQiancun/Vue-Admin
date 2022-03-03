@@ -1,6 +1,33 @@
 <template>
-  <div class="">
-    Excel
+  <div class="excel">
+    <div class="excel_box">
+      <div class="excel_body">
+        <div class="body_header">
+          <el-tabs v-model="activeName">
+            <el-tab-pane
+              v-for="(item, index) in workbook.SheetNames || []"
+              :label="item"
+              :name="item"
+              :key="index"
+            />
+          </el-tabs>
+        </div>
+        <div class="body_content">
+          <el-table
+              :data="(workBookSheet[activeName] || {})['body'] || []"
+              style="width: 100%"
+              height="250">
+            <el-table-column
+                v-for="(item, index) in ((workBookSheet[activeName] || {})['body'] || [])[0]"
+                fixed
+                :prop="index"
+                :label="index"
+                width="150"
+            />
+          </el-table>
+        </div>
+      </div>
+    </div>
     <div>
       <el-upload
           action=""
@@ -18,15 +45,21 @@
 </template>
 
 <script>
+// 直接引入 XLSX 无法使用，可以按需引入
 // import XLSX from 'xlsx'
+import { read, utils } from 'xlsx'
 export default {
-  name: "index",
+  name: "Excel",
   data() {
     return {
+      activeName: '',
+      workbook: {},
+      FileReader: null,
       fileData: null,
       fileList: [],
       outputs: [],
       query: [],
+      workBookSheet: {}
     }
   },
   created() {
@@ -44,30 +77,46 @@ export default {
     readExcel(fileData) {
       if(fileData && /(xlsx)$/.test(fileData.name)) {
         if (fileData.raw) {
-          const reader = new FileReader()
-          console.log(reader)
-          reader.onload = ev => {
-            console.log("进入onload", ev)
+          this.FileReader = new FileReader()
+          this.FileReader.onload = ev => {
             try {
-              const data = ev.target.result
-              console.log("data", data)
-              // const workbook = XLSX.read(data, {
-              //   type: 'binary'
-              // });
-              // console.log(workbook)
+              this.workbook = read(ev.target.result, {
+                type: 'binary'
+              })
+
+              console.log(this.workbook)
+              this.activeName = this.workbook.SheetNames[0] || ''
+              let workBookSheet = {}
+              this.workbook.SheetNames.forEach(item => {
+                workBookSheet[item] = { body: utils.sheet_to_json(this.workbook.Sheets[item])}
+              })
+              this.workBookSheet = workBookSheet
+
+              // let arr = (this.workbook.Sheets || {})[this.activeName]
+              // let Sheet = {}
+              // for (const arrKey in arr) {
+              //   let match = arrKey.match(/^[A-Za-z]+/)
+              //   let key = match ? match[0] : null
+              //   if(key){
+
+                //   if(Sheet[key]){
+                //     Sheet[key].push(arr[arrKey])
+                //   } else {
+                //     Sheet[key] = [arr[arrKey]]
+                //   }
+              //   }
+              // }
+
             }
             catch (e) {
               console.log(e)
             }
           }
-          reader.onerror = err => {
-            console.log(err)
-          }
           try {
-            reader.readAsArrayBuffer(fileData.raw)
+            this.FileReader.readAsArrayBuffer(fileData.raw)
           }
           catch (e) {
-            console.log("readAsArrayBuffer", e)
+            console.log("readAsArrayBuffer Error", e)
           }
         }
 
