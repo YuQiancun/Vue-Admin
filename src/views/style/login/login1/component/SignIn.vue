@@ -1,5 +1,5 @@
 <template>
-  <div class="sign_in">
+  <div class="sign_up">
     <el-form ref="loginForm"
              :model="loginForm"
              :rules="loginRules"
@@ -8,7 +8,7 @@
              label-position="left"
     >
       <div class="title-container">
-        <h3 class="title">注册</h3>
+        <h3 class="title">登录</h3>
       </div>
 
       <el-form-item prop="username">
@@ -36,7 +36,7 @@
               autocomplete="on"
               @keyup.native="checkCapslock"
               @blur="capsTooltip = false"
-              @keyup.enter.native="onLogin"
+              @keyup.enter.native="onSignIn"
               prefix-icon="el-icon-lock"
           />
           <span class="show-pwd" @click="onShowPwd">
@@ -45,14 +45,14 @@
         </el-form-item>
       </el-tooltip>
 
-      <el-button :loading="loading" type="primary" style="width:100%;" @click.native.prevent="onLogin">登录</el-button>
+      <el-button :loading="loading" type="primary" style="width:100%;" @click.native.prevent="onSignIn">登录</el-button>
     </el-form>
   </div>
 </template>
 
 <script>
 export default {
-  name: "SignIn",
+  name: "SignUp",
   data() {
     return {
       loginRules: {
@@ -60,7 +60,8 @@ export default {
       },
       loginForm: {
         userName: '',
-        passWord: ''
+        passWord: '',
+        rePassword: '',
       },
       passwordType: 'password',
       capsTooltip: false,
@@ -68,7 +69,15 @@ export default {
     }
   },
   methods: {
+    checkCapslock(e) {
+      console.log(e)
+      const { key } = e
+      this.capsTooltip = key && key.length === 1 && (key >= 'A' && key <= 'Z')
+    },
     onShowPwd() {
+
+    },
+    onSignIn() {
 
     }
   }
@@ -76,7 +85,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.sign_in{
+.sign_up{
   position: absolute;
   width: 100%;
   height: 100%;

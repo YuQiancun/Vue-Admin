@@ -1,5 +1,5 @@
 <template>
-  <div class="sign_up">
+  <div class="sign_in">
     <el-form ref="loginForm"
              :model="loginForm"
              :rules="loginRules"
@@ -8,7 +8,7 @@
              label-position="left"
     >
       <div class="title-container">
-        <h3 class="title">登录</h3>
+        <h3 class="title">注册</h3>
       </div>
 
       <el-form-item prop="username">
@@ -36,7 +36,7 @@
               autocomplete="on"
               @keyup.native="checkCapslock"
               @blur="capsTooltip = false"
-              @keyup.enter.native="onLogin"
+              @keyup.enter.native="onSignUp"
               prefix-icon="el-icon-lock"
           />
           <span class="show-pwd" @click="onShowPwd">
@@ -45,14 +45,34 @@
         </el-form-item>
       </el-tooltip>
 
-      <el-button :loading="loading" type="primary" style="width:100%;" @click.native.prevent="onLogin">登录</el-button>
+      <el-form-item prop="password">
+        <el-input
+            :key="passwordType"
+            ref="password"
+            v-model="loginForm.rePassword"
+            :type="passwordType"
+            placeholder="再次输入密码"
+            name="password"
+            tabindex="2"
+            autocomplete="on"
+            @keyup.native="checkCapslock"
+            @blur="capsTooltip = false"
+            @keyup.enter.native="onSignUp"
+            prefix-icon="el-icon-lock"
+        />
+        <span class="show-pwd" @click="onShowPwd">
+            <i :class="passwordType === 'password' ? 'el-icon-view' : 'el-icon-view'" />
+          </span>
+      </el-form-item>
+
+      <el-button :loading="loading" type="primary" style="width:100%;" @click.native.prevent="onSignUp">登录</el-button>
     </el-form>
   </div>
 </template>
 
 <script>
 export default {
-  name: "SignUp",
+  name: "SignIn",
   data() {
     return {
       loginRules: {
@@ -68,7 +88,14 @@ export default {
     }
   },
   methods: {
+    checkCapslock(e) {
+      const { key } = e
+      this.capsTooltip = key && key.length === 1 && (key >= 'A' && key <= 'Z')
+    },
     onShowPwd() {
+
+    },
+    onSignUp() {
 
     }
   }
@@ -76,7 +103,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.sign_up{
+.sign_in{
   position: absolute;
   width: 100%;
   height: 100%;
