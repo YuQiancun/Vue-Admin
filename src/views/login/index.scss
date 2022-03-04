@@ -11,6 +11,7 @@
     justify-content: center;
     align-items: center;
     .module{
+      position: relative;
       //margin: 50% auto 0;
       //transform: translateY(-50%);
       width: 700px;
@@ -24,6 +25,7 @@
       .img{
         position: relative;
         flex: 1;
+        z-index: 1;
         overflow: hidden;
         &:after{
           background: url("back.jpg") 100% 100%/ 100% 100% no-repeat;
@@ -40,9 +42,41 @@
         }
       }
       .form{
+        display: flex;
+        contain: content;
+        align-items: center;
+        justify-content: center;
+
+        position: relative;
         width: 240px;
-        background-color: #E2E2E2;
+        padding: 12px;
+        box-sizing: border-box;
+        background-color: white;
+        //background: linear-gradient(to right, #fff, transparent);
         transition: all .3s;
+        .login-form{
+
+          .show-pwd {
+            position: absolute;
+            right: 10px;
+            bottom: 0;
+            font-size: 16px;
+            color: #333333;
+            cursor: pointer;
+            user-select: none;
+            z-index: 1;
+          }
+        }
+        &:after{
+          position: absolute;
+          content: "";
+          left: -20px;
+          top: 0;
+          width: 20px;
+          height: 100%;
+          background: linear-gradient(to right, transparent, rgba(255, 255, 255, .99) 99%, #fff);
+          z-index: 1;
+        }
       }
     }
   }

@@ -20,17 +20,24 @@
           </div>
         </el-card>
       </div>
-      <div id="map_container" v-loading="mapLoading"/>
+      <div id="map_container" v-loading="mapLoading">
+        <div class="rightMenu" :class="{'show': isShow}" :style="{top: rightMenuTop + 'px', left: rightMenuLeft + 'px'}">
+          MENU
+        </div>
+      </div>
     </div>
   </div>
 </template>
-
+offsetX
 <script>
 export default {
   name: "AMap",
   data() {
     return {
+      isShow: false,
       mapLoading: true,
+      rightMenuTop: 0,
+      rightMenuLeft: 0,
       map: null,
       mapOption: {
         mapStyle: "amap://styles/ba3b3dde8e0ab42d1081852f3cdb6356",
@@ -56,9 +63,38 @@ export default {
     }
   },
   mounted() {
+    this.initRightMenu()
     this.initAMap()
   },
   methods: {
+    initRightMenu() {
+      const dom = document.getElementById("map_container")
+      console.log(dom)
+      // dom.onmousedown = () => {
+      //   this.isShow = false
+      // }
+      dom.ondblclick = () => {
+        this.isShow = false
+      }
+      dom.oncontextmenu = e => {
+        console.log(e)
+        this.rightMenuTop = e.offsetY
+        this.rightMenuLeft = e.offsetX
+        console.log(this.rightMenuTop,
+        this.rightMenuLeft)
+        e.preventDefault()
+        !this.isShow && (this.isShow = true);
+      }
+      // dom.click = e => {
+      //   console.log(e)
+      //   e.preventDefault()
+      //   this.isShow = !this.isShow
+      // }
+      // dom.ondblclick = e => {
+      //   console.log(e)
+      //   e.preventDefault()
+      // }
+    },
     initAMap() {
       /* eslint-disable */
       this.map = new AMap.Map('map_container', {
@@ -117,6 +153,22 @@ export default {
     #map_container{
       width: 100%;
       height: 100%;
+      .rightMenu{
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 120px;
+        height: 200px;
+        background-color: #42b983;
+        box-shadow: 0 0 10px #666;
+        z-index: 9999;
+        display: none;
+        transition: all .3s;
+        &.show{
+          transition: all .3s;
+          display: block;
+        }
+      }
     }
     .AMapMenu{
       z-index: 9999;

@@ -28,19 +28,19 @@
         </div>
       </div>
       <div class="excel_content">
-          <el-table
-              :data="(workBookSheet[activeName] || {})['body'] || []"
-              style="width: 100%"
-              height="100%">
-            <el-table-column
-                v-for="(item, index) in ((workBookSheet[activeName] || {})['body'] || [])[0]"
-                fixed
-                :prop="index"
-                :label="index"
-                :key="item"
-            />
-          </el-table>
-        </div>
+        <el-table
+          :data="(workBookSheet[activeName] || {})['body'] || []"
+          style="width: 100%"
+          height="100%">
+          <el-table-column
+            v-for="(item, index) in ((workBookSheet[activeName] || {})['body'] || [])[0]"
+            fixed
+            :prop="index"
+            :label="index"
+            :key="item"
+          />
+        </el-table>
+      </div>
     </div>
   </div>
 </template>

@@ -33,15 +33,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@media screen and (max-width: 1023px){
-  .layout_aside{
-    display: none;
-    //position: absolute;
-    //margin-left: -200px;
-    //z-index: 1;
-    //transform: translateX(-100%);
-  }
-}
 
 .layout{
   height: 100%;

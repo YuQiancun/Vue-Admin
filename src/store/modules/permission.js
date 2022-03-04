@@ -19,7 +19,7 @@ function FilterMenuRoles(roles = [], menu = {}, redirect = []) {
     roles.forEach(item => {
         if(menu[item.name.toLowerCase()]) {
             if(item.children && menu[item.name.toLowerCase()].children) {
-                let subMenu = menu[item.name.toLowerCase()]
+                let subMenu = Object.assign({}, menu[item.name.toLowerCase()])
                 let redirectPath = JSON.parse(JSON.stringify(redirect))
                 redirectPath.push(subMenu.path.replace(/\//, ''))
 
@@ -133,37 +133,30 @@ const actions = {
 
             // axios请求完全菜单 || 对比本地菜单过滤
             let accessedRouters = []
-            // setTimeout(() => {
-                // 假比对权限
-                // console.log(FilterMenuRoles(roles, asyncRoutes))
-                // accessedRouters = asyncRoutesArr.filter(route => {
-                //     return !/^A$/.test(route.name)
-                // })
-                accessedRouters = FilterMenuRoles(roles,Object.assign(asyncRoutes))
-                // console.log("accessedRouters", accessedRouters)
-                commit('SET_ROLES', roles)
-                // 如果没有Home首页访问权限，则获取顺序第一个的首页 meta.hidden:false 的第一个
-                // rootPath未做hidden判断，以后再处理
-                const MenuTree = FilterMenuTree(JSON.parse(JSON.stringify(accessedRouters)))
-                let RootPath = FilterMenuRootPath(MenuTree)
+            accessedRouters = FilterMenuRoles(roles, asyncRoutes)
+            // console.log("accessedRouters", accessedRouters)
+            commit('SET_ROLES', roles)
+            // 如果没有Home首页访问权限，则获取顺序第一个的首页 meta.hidden:false 的第一个
+            // rootPath未做hidden判断，以后再处理
+            const MenuTree = FilterMenuTree(JSON.parse(JSON.stringify(accessedRouters)))
+            let RootPath = FilterMenuRootPath(MenuTree)
 
-                const replacePath = asyncRootMap.map(item => {
-                    (RootPath.length && item.name === "Root") && (item.redirect = RootPath[0])
-                    return item
-                })
+            const replacePath = asyncRootMap.map(item => {
+                (RootPath.length && item.name === "Root") && (item.redirect = RootPath[0])
+                return item
+            })
 
-                console.log("accessedRouters", accessedRouters)
-                console.log("asyncRoutes", asyncRoutes)
+            // console.log("accessedRouters", accessedRouters)
+            // console.log("asyncRoutes", asyncRoutes)
 
-                // console.log("MenuTree", MenuTree)
-                // console.log("accessedRouters", accessedRouters)
-                // console.log("得到replacePath", replacePath)
-                commit("SET_REPLACE_PATH", replacePath)
-                commit("SET_DEFAULT_ROUTES")
-                commit("SET_ROUTES", accessedRouters)
+            // console.log("MenuTree", MenuTree)
+            // console.log("accessedRouters", accessedRouters)
+            // console.log("得到replacePath", replacePath)
+            commit("SET_REPLACE_PATH", replacePath)
+            commit("SET_DEFAULT_ROUTES")
+            commit("SET_ROUTES", accessedRouters)
 
-                resolve()
-            // }, 1000)
+            resolve()
         })
     }
 }
