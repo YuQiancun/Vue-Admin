@@ -124,17 +124,18 @@ export default {
         width: 50%;
         height: 100%;
         background-color: white;
+        box-shadow: 0 0 10px #C2C2C2;
         overflow: hidden;
-        transition: all 1s;
+        transition: all .4s;
         &.left{
           left: 0;
           right: auto;
-          transition: all .5s;
+          transition: all .4s;
         }
         &.right{
           left: 100%;
           transform: translateX(-100%);
-          transition: all .5s;
+          transition: all .4s;
         }
       }
     }
