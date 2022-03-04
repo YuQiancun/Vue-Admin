@@ -15,7 +15,8 @@ const mutations = {
     SET_TOKEN(state, data) {
         // 存储
         // localStorage.setItem("token", data);
-        Cookies.set("token", data, {expires: new Date(new Date().getTime() + 8 * 60 * 60 * 1000)})
+        Cookies.set("token", data, {expires: new Date(new Date().getTime() + 0.5 * 60 * 60 * 1000)})
+        console.log("Token expires:" +  new Date(new Date().getTime() + 0.5 * 60 * 60 * 1000))
         state.token = data
         state.isLogin = true
     },
@@ -25,6 +26,7 @@ const mutations = {
     CLEAR_TOKEN(state) {
         // 清除
         Cookies.remove("token")
+        // localStorage.clear()
         state.token = null
         state.isLogin = false
     }
@@ -42,10 +44,11 @@ const actions = {
     },
     LoginOut({ commit }) {
         return new Promise(resolve => {
+            commit("CLEAR_IS_ROLES")
             commit("CLEAR_TOKEN")
             setTimeout(() => {
                 resolve()
-            }, 3000)
+            }, 1500)
         })
     }
 }

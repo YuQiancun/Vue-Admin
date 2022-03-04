@@ -5,6 +5,8 @@
 </template>
 
 <script>
+import { resetRouter } from "@/router";
+
 export default {
   name: "LayoutHeader",
   data() {
@@ -15,6 +17,7 @@ export default {
   methods: {
     onLoginOut() {
       this.loading = true
+      resetRouter()
       this.$store.dispatch("LoginOut").then(() => {
         this.loading = false
         this.$message.success("LOGINOUT")

@@ -8,4 +8,5 @@ npm install node-sass@4.x --sava-dev
 
 npm install js-cookie --save
 npm install --save vue-cropper
+npm install --save xlsx
 ```

@@ -7,8 +7,7 @@ import Layout from '@/layout/index.vue'
 
 Vue.use(VueRouter)
 
-//所有权限通用路由表
-//如首页和登录页和一些不用权限的公用页面
+// 根路径
 export const asyncRootMap = [
   {
     path: '/',
@@ -18,6 +17,8 @@ export const asyncRootMap = [
   },
 ]
 
+//所有权限通用路由表
+//如首页和登录页和一些不用权限的公用页面
 export const constantRouterMap = [
   {
     path: '/login',
@@ -83,11 +84,24 @@ export const constantRouterErrorMap = [
     component: () => import('@/views/error-page/401'),
   }
 ]
-const router = new VueRouter({
+// const router = new VueRouter({
+//   mode: 'history',
+//   base: process.env.BASE_URL,
+//   routes: constantRouterMap
+// })
+
+export const createRouter = (concatRouter = []) => new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes: constantRouterMap
+  routes: constantRouterMap.concat(...concatRouter)
 })
+
+const router = createRouter()
+
+export function resetRouter(concatRouter) {
+  const newRouter = createRouter(concatRouter)
+  router.matcher = newRouter.matcher // reset router
+}
 
 // export const createRouter = routes => new VueRouter({
 //   mode: 'history',
@@ -137,7 +151,6 @@ router.beforeEach((to,from,next) => {
             })
             next({...to, replace: true})
           })
-
         })
         // 请求 error =>
         // console.log(error)

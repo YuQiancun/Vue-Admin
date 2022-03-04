@@ -4,7 +4,53 @@
       <div class="module">
         <div class="img" />
         <div class="form" v-loading="loading">
-          <el-button @click="onLogin">onLogin</el-button>
+          <el-form ref="loginForm"
+             :model="loginForm"
+             :rules="loginRules"
+             class="login-form"
+             autocomplete="on"
+             label-position="left"
+          >
+            <div class="title-container">
+              <h3 class="title">登录</h3>
+            </div>
+
+            <el-form-item prop="username">
+              <el-input
+                  ref="username"
+                  v-model="loginForm.username"
+                  placeholder="用户名"
+                  name="username"
+                  type="text"
+                  tabindex="1"
+                  autocomplete="on"
+                  prefix-icon="el-icon-user"
+              />
+            </el-form-item>
+            <el-tooltip v-model="capsTooltip" content="Caps lock is On" placement="right" manual>
+              <el-form-item prop="password">
+                <el-input
+                    :key="passwordType"
+                    ref="password"
+                    v-model="loginForm.password"
+                    :type="passwordType"
+                    placeholder="密码"
+                    name="password"
+                    tabindex="2"
+                    autocomplete="on"
+                    @keyup.native="checkCapslock"
+                    @blur="capsTooltip = false"
+                    @keyup.enter.native="onLogin"
+                    prefix-icon="el-icon-lock"
+                />
+                <span class="show-pwd" @click="onShowPwd">
+            <i :class="passwordType === 'password' ? 'el-icon-view' : 'el-icon-view'" />
+          </span>
+              </el-form-item>
+            </el-tooltip>
+
+            <el-button :loading="loading" type="primary" style="width:100%;" @click.native.prevent="onLogin">登录</el-button>
+          </el-form>
         </div>
       </div>
     </div>
@@ -13,19 +59,37 @@
 
 <script>
 
+import { resetRouter } from "@/router";
+
 export default {
   name: "index",
   data() {
     return {
+      loginRules: {
+
+      },
+      loginForm: {
+        userName: '',
+        passWord: ''
+      },
+      passwordType: 'password',
+      capsTooltip: false,
       loading: false,
       api: process.env.VUE_APP_BASE_API
     }
   },
   methods: {
+    checkCapslock(e) {
+      const { key } = e
+      this.capsTooltip = key && key.length === 1 && (key >= 'A' && key <= 'Z')
+    },
     onAddRouterOptions() {
 
     },
     onGetRoutes() {
+
+    },
+    onShowPwd() {
 
     },
     onLogin() {
@@ -34,7 +98,7 @@ export default {
         url: '/api/login'
       }
       this.$api.post(params).then(res => {
-        console.log(res)
+        resetRouter()
         this.$store.dispatch("LoginByUsername", res).then(() => {
           this.$message.success(this.$store.getters.token)
           this.$router.push({ path: '/' }); //登录成功之后重定向到首页
@@ -52,44 +116,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.login{
-  .login_box{
-    padding: 0;
-    overflow: hidden;
-    .module{
-      margin: 200px auto 0;
-      width: 700px;
-      height: 400px;
-      box-shadow: 0 0 10px #c1c1c1;
-      box-sizing: border-box;
-
-      display: flex;
-      flex-wrap: nowrap;
-
-      .img{
-        position: relative;
-        flex: 1;
-        overflow: hidden;
-        &:after{
-          background: url("back.jpg") 100% 100%/ 100% 100% no-repeat;
-          position: absolute;
-          content: "";
-          width: 100%;
-          height: 100%;
-          //background-color: rgba(0,0, 0, .1);
-          //-webkit-filter: blur(1px);
-          //-moz-filter: blur(1px);
-          //-ms-filter: blur(1px);
-          //-o-filter: blur(1px);
-          //filter: blur(1px);
-        }
-      }
-      .form{
-        width: 240px;
-        background-color: #E2E2E2;
-        transition: all .3s;
-      }
-    }
-  }
-}
+@import "./index.scss";
 </style>

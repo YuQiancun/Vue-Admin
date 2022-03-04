@@ -33,6 +33,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 .layout{
   height: 100%;
   .el-header{
@@ -40,11 +41,17 @@ export default {
     box-shadow: 0 0 10px #e2e2e2;
   }
   .layout_header{
+    background-color: #333;
   }
   .layout_container{
+    width: 100%;
+    max-width: 1920px;
+    min-width: 325px;
+    margin: 0 auto;
     height: calc(100vh - #{ $LayoutHeaderHeight });
     .layout_aside{
       background-color: $LayoutAsideBack;
+      transition: all .3s;
     }
     .layout_main{
       padding: 0;
@@ -81,8 +88,6 @@ export default {
 </style>
 
 <style lang="scss">
-.body_page{
-  //padding: 12px;
-  box-sizing: border-box;
-}
+@import "../assets/style/body_page_style";
+@import "../assets/style/global_media";
 </style>

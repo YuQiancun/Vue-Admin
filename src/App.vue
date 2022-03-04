@@ -3,14 +3,15 @@
     <transition name="app" mode="out-in">
       <router-view />
     </transition>
-
-<!--    {{ $store.getters.isRoles }}-->
+    <transition name="app" mode="out-in">
+      <Loading v-if="!$store.getters.isRoles && $route.path !== '/login'" />
+    </transition>
   </div>
 </template>
 
 <style>
 #app {
-  min-width: 700px;
+  /*min-width: 700px;*/
   position: relative;
   height: 100vh;
 }
@@ -18,7 +19,7 @@
 
 <style lang="scss" scoped>
 .app-enter-active, .app-leave-active {
-  transition: all .5s;
+  transition: all .2s;
 }
 .app-enter, .app-leave-to {
   transform: scale(.95);

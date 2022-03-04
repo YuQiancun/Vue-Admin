@@ -1,12 +1,12 @@
 <template>
-  <div class="c_map">
-    c_map
+  <div class="online_hat">
+    OnlineChat
   </div>
 </template>
 
 <script>
 export default {
-  name: "BMap"
+  name: "OnlineChat"
 }
 </script>
 

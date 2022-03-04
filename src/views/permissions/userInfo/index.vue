@@ -8,25 +8,26 @@
           过后将会使用单独的上传进行上传
           on-change事件获取当前upload组件的文件缓存
       -->
-<!--      <div v-for="i in 4" :key="i">-->
-
         <el-upload
             class="avatar-uploader"
             action="https://jsonplaceholder.typicode.com/posts/"
             :show-file-list="false"
             :auto-upload='false'
             :on-change='getUploadFile'>
-<!--          <img v-if="imageUrl" :src="imageUrl" class="avatar">-->
-<!--          <i v-else class="el-icon-plus avatar-uploader-icon"></i>-->
+          <!--          <img v-if="imageUrl" :src="imageUrl" class="avatar">-->
+          <!--          <i v-else class="el-icon-plus avatar-uploader-icon"></i>-->
           <i class="el-icon-plus avatar-uploader-icon" />
         </el-upload>
-<!--      </div>-->
+      <div v-for="i in 124" :key="i">
+        <hr>
+        <br>
+      </div>
     </div>
     </el-scrollbar>
     <div class="dialog_box">
 
       <!--我将裁剪的Dom放在了一个dialog弹框中-->
-      <el-dialog title="图片剪裁" :visible.sync="dialogVisible" append-to-body>
+      <el-dialog title="照片剪裁" :visible.sync="dialogVisible" append-to-body>
         <div class="cropper-content">
           <div class="cropper" style="text-align:center">
             <vueCropper
@@ -34,7 +35,7 @@
                 :img="option.img"
                 :outputSize="option.size"
                 :outputType="option.outputType"
-                :info="true"
+                :info="option.info"
                 :full="option.full"
                 :canMove="option.canMove"
                 :canMoveBox="option.canMoveBox"
