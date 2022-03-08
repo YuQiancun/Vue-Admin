@@ -3,13 +3,14 @@
     <div class="login_box">
       <div class="module">
         <div class="img" />
-        <div class="form" v-loading="loading">
+        <div class="form nt_container" v-loading="loading">
           <el-form ref="loginForm"
              :model="loginForm"
              :rules="loginRules"
              class="login-form"
              autocomplete="on"
              label-position="left"
+              :disabled="loading"
           >
             <div class="title-container">
               <h3 class="title">登录</h3>
@@ -17,6 +18,7 @@
 
             <el-form-item prop="username">
               <el-input
+                  class="nt_input"
                   ref="username"
                   v-model="loginForm.username"
                   placeholder="用户名"
@@ -30,6 +32,7 @@
             <el-tooltip v-model="capsTooltip" content="Caps lock is On" placement="right" manual>
               <el-form-item prop="password">
                 <el-input
+                    class="nt_input"
                     :key="passwordType"
                     ref="password"
                     v-model="loginForm.password"
@@ -49,7 +52,7 @@
               </el-form-item>
             </el-tooltip>
 
-            <el-button :loading="loading" type="primary" style="width:100%;" @click.native.prevent="onLogin">登录</el-button>
+            <el-button class="nt_button" :loading="loading" type="primary" style="width:100%;" @click.native.prevent="onLogin">登录</el-button>
           </el-form>
         </div>
       </div>
@@ -90,7 +93,7 @@ export default {
 
     },
     onShowPwd() {
-
+      this.passwordType = this.passwordType ? '' : "password"
     },
     onLogin() {
       this.loading = true
@@ -104,8 +107,8 @@ export default {
           this.$router.push({ path: '/' }); //登录成功之后重定向到首页
         }).catch(err => {
           this.$message.error(err); //登录失败提示错误
+          this.loading = false
         })
-        this.loading = false
       }).catch(e => {
         console.log(e)
         this.loading = false

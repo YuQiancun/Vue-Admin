@@ -1,0 +1,62 @@
+$NiTaiBack: #ecf0f3;
+$HideBack: #bdc0c2;
+$LowBack: #ffffff;
+
+.nt_container{
+  background: $NiTaiBack !important;
+  .nt_button{
+    &.is-disabled{
+      border: none;
+      &:hover, &:focus{
+        border: none;
+      }
+    }
+
+    color: #545965 !important;
+    border-radius: 50px;
+    background: $NiTaiBack !important;
+    border: 1px solid $NiTaiBack;
+    box-shadow: 10px 10px 10px $HideBack,
+    -10px -10px 10px $LowBack;
+    transition: all .3s;
+    &:hover, &:focus{
+      text-shadow: 4px 4px 4px $HideBack,
+      -4px -4px 4px $LowBack;
+      color: #545965 !important;
+      border-radius: 50px;
+      background: $NiTaiBack !important;
+      border: 1px solid $NiTaiBack;
+      box-shadow: 10px 10px 10px $HideBack,
+      -10px -10px 10px $LowBack,
+      inset 10px 10px 10px $HideBack,
+      inset -10px -10px 10px $LowBack;
+    }
+  }
+  .nt_input{
+    .el-input__inner{
+      background-color: transparent;
+      border: none !important;
+      &:focus, &:hover{
+        border: none !important;
+      }
+    }
+
+    color: #545965 !important;
+    border-radius: 50px;
+    overflow: hidden;
+    background: $NiTaiBack !important;
+    box-shadow: 10px 10px 10px $HideBack,
+    -10px -10px 10px $LowBack;
+    transition: all .3s;
+    &:hover, &:focus{
+      color: #545965 !important;
+      border-radius: 50px;
+      background: $NiTaiBack !important;
+      box-shadow: 0 0 0 $HideBack,
+      0 0 0 $LowBack,
+      inset 10px 10px 10px $HideBack,
+      inset -10px -10px 10px $LowBack;
+      transition: all .3s;
+    }
+  }
+}

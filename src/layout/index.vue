@@ -90,4 +90,5 @@ export default {
 <style lang="scss">
 @import "../assets/style/body_page_style";
 @import "../assets/style/global_media";
+@import "../assets/style/global_NiTai_style";
 </style>
