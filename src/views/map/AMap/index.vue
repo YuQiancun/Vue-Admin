@@ -28,7 +28,7 @@
     </div>
   </div>
 </template>
-offsetX
+
 <script>
 export default {
   name: "AMap",
@@ -69,7 +69,7 @@ export default {
   methods: {
     initRightMenu() {
       const dom = document.getElementById("map_container")
-      console.log(dom)
+      // console.log(dom)
       // dom.onmousedown = () => {
       //   this.isShow = false
       // }
