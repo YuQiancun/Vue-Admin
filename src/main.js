@@ -8,7 +8,7 @@ import 'element-ui/lib/theme-chalk/index.css';
 // 裁剪组件
 import VueCropper from 'vue-cropper'
 
-Vue.use(ElementUI);
+Vue.use(ElementUI)
 Vue.use(VueCropper)
 
 // 全局组件

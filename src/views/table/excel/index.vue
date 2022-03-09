@@ -14,7 +14,7 @@
             <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
           </el-upload>
         </div>
-        <el-button @click="onExcel">onExcel</el-button>
+<!--        <el-button @click="onExcel">onExcel</el-button>-->
         <div class="header_tabs">
           <el-tabs v-model="activeName">
             <el-tab-pane

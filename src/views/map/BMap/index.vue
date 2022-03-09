@@ -1,7 +1,9 @@
 <template>
   <div class="body_page b_map">
     <div class="body_box b_map_box">
-      <div id="map_container" v-loading="mapLoading" />
+      <div id="map_container" v-loading="mapLoading" >
+        <el-button @click="initBMap">加载BMap</el-button>
+      </div>
     </div>
   </div>
 </template>
@@ -19,23 +21,24 @@ export default {
     if (navigator.geolocation) {
       console.log("想干嘛就干嘛");
       navigator.geolocation.getCurrentPosition(res => {
-        console.log("res")
+        console.log("res", res)
       })
     }
   },
   mounted() {
-    this.initBMap()
+    // this.initBMap()
   },
   methods: {
     initBMap() {
+      /* eslint-disable */
       this.BMap = new BMapGL.Map("map_container");
       this.setPoint()
-      console.log("this.BMap", this.BMap)
-      console.log("BMapGL", BMapGL)
     },
     setPoint() {
       this.mapLoading = true
+      /* eslint-disable */
       let point = new BMapGL.Point(116.404, 39.915);
+      /* eslint-disable */
       this.BMap.centerAndZoom(point, 10);
       setTimeout(() => {
         this.mapLoading = false
@@ -58,7 +61,6 @@ export default {
     #map_container {
       width: 100%;
       height: 100%;
-      background-color: red;
     }
   }
 }
