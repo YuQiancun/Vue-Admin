@@ -11,12 +11,14 @@
               :show-file-list="false"
               :file-list="fileList">
             <el-button size="small" type="primary">点击上传</el-button>
-            <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
           </el-upload>
         </div>
 <!--        <el-button @click="onExcel">onExcel</el-button>-->
         <div class="header_tabs">
-          <el-tabs v-model="activeName">
+          <el-tabs
+              @tab-click="onTabClick"
+              v-model="activeName"
+          >
             <el-tab-pane
               v-for="(item, index) in workbook.SheetNames || ['']"
               :label="item"
@@ -37,7 +39,7 @@
             fixed
             :prop="index"
             :label="index"
-            :key="item"
+            :key="index + item"
           />
         </el-table>
       </div>
@@ -73,6 +75,10 @@ export default {
 
   },
   methods: {
+    onTabClick(e) {
+      this.activeName = e.name
+      this.workBookSheetSlice = this.workBookSheet[this.activeName].body.slice(0, 100)
+    },
     onChange(file) {
       this.fileData = file
       this.readExcel(this.fileData)
@@ -96,6 +102,7 @@ export default {
 
               for (const item of this.workbook.SheetNames) {
                 let body = this.sheet_to_json(this.workbook.Sheets[item])
+                console.log(item, body)
                 workBookSheet[item] = { body }
               }
               this.loading = false

@@ -3,7 +3,7 @@
     <div class="login_box">
       <div class="module">
         <div class="img" />
-        <div class="form nt_container" v-loading="loading">
+        <div class="form nt_container">
           <el-form ref="loginForm"
              :model="loginForm"
              :rules="loginRules"

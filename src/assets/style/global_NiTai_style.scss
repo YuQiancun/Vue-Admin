@@ -41,22 +41,40 @@ $LowBack: #ffffff;
       }
     }
 
-    color: #545965 !important;
-    border-radius: 50px;
-    overflow: hidden;
-    background: $NiTaiBack !important;
-    box-shadow: 10px 10px 10px $HideBack,
-    -10px -10px 10px $LowBack;
-    transition: all .3s;
-    &:hover, &:focus{
-      color: #545965 !important;
+    //color: #545965 !important;
+    //border-radius: 50px;
+    //overflow: hidden;
+    //background: $NiTaiBack !important;
+    //box-shadow: 10px 10px 10px $HideBack,
+    //-10px -10px 10px $LowBack;
+    //transition: all .3s;
+    //&:hover, &:focus{
+    //  color: #545965 !important;
+    //  border-radius: 50px;
+    //  background: $NiTaiBack !important;
+    //  box-shadow: 0 0 0 $HideBack,
+    //  0 0 0 $LowBack,
+    //  inset 10px 10px 10px $HideBack,
+    //  inset -10px -10px 10px $LowBack;
+    //  transition: all .3s;
+    //}
+    .el-input__inner{    color: #545965 !important;
       border-radius: 50px;
+      overflow: hidden;
       background: $NiTaiBack !important;
-      box-shadow: 0 0 0 $HideBack,
-      0 0 0 $LowBack,
-      inset 10px 10px 10px $HideBack,
-      inset -10px -10px 10px $LowBack;
+      box-shadow: 10px 10px 10px $HideBack,
+      -10px -10px 10px $LowBack;
       transition: all .3s;
+      &:hover, &:focus{
+        color: #545965 !important;
+        border-radius: 50px;
+        background: $NiTaiBack !important;
+        box-shadow: 0 0 0 $HideBack,
+        0 0 0 $LowBack,
+        inset 10px 10px 10px $HideBack,
+        inset -10px -10px 10px $LowBack;
+        transition: all .3s;
+      }
     }
   }
 }
