@@ -1,11 +1,11 @@
 <template>
-  <div class="audioPay">
-    AudioPay
+  <div class="audioPlay">
+    AudioPlay
   </div>
 </template>
 
 <script>
 export default {
-  name: "AudioPay"
+  name: "AudioPlay"
 }
 </script>

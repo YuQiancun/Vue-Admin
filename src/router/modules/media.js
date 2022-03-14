@@ -17,11 +17,11 @@ const media = {
             },
             children: [
                 {
-                    path: 'audioPay',
-                    name: "AudioPay",
-                    component: () => import('@/views/media/audio/audioPay'),
+                    path: 'audioPlay',
+                    name: "AudioPlay",
+                    component: () => import('@/views/media/audio/audioPlay'),
                     meta: {
-                        title: 'AudioPay',
+                        title: 'AudioPlay',
                         breadcrumb: false,
                     },
                 }
@@ -37,11 +37,11 @@ const media = {
             },
             children: [
                 {
-                    path: 'videoPay',
-                    name: "VideoPay",
-                    component: () => import('@/views/media/video/videoPay'),
+                    path: 'videoPlay',
+                    name: "VideoPlay",
+                    component: () => import('@/views/media/video/videoPlay'),
                     meta: {
-                        title: 'VideoPay',
+                        title: 'VideoPlay',
                         breadcrumb: false,
                     },
                 }
