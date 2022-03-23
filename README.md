@@ -6,6 +6,7 @@ Vue-Admin
 npm install sass-loader@8.x --save-dev
 npm install node-sass@4.x --sava-dev
 
+npm install echarts --save  // ECharts 图标插件
 npm install js-cookie --save
 npm install --save vue-cropper  // 图片裁剪插件
 npm install --save xlsx         //excle 处理插件

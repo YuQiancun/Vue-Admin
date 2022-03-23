@@ -1,19 +1,17 @@
 <template>
-  <div class="graphics">
-    <transition name="app" mode="out-in">
-      <router-view />
-    </transition>
+  <div class="echarts">
+    <router-view />
   </div>
 </template>
 
 <script>
 export default {
-  name: "Graphics"
+  name: "ECharts"
 }
 </script>
 
-<style lang="scss">
-.graphics{
+<style lang="scss" scoped>
+.echarts{
   position: relative;
   display: flex;
   width: 100%;
