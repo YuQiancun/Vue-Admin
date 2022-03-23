@@ -10,7 +10,7 @@
         </el-scrollbar>
       </el-aside>
       <el-main class="layout_main">
-        <el-scrollbar wrap-class="scrollbar-wrapper">
+        <el-scrollbar ref="scrollbar" wrap-class="scrollbar-wrapper">
           <transition name="fade" mode="out-in">
             <router-view />
           </transition>
@@ -67,7 +67,8 @@ export default {
       .el-scrollbar__wrap{
         overflow-x: hidden;
         .el-scrollbar__view{
-          //height: 100%;
+          height: 100%;
+          //overflow: hidden;
           //min-height: 100%;
         }
       }

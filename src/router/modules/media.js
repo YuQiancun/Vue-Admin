@@ -64,6 +64,15 @@ const media = {
                         title: 'GraphicsLoad',
                         breadcrumb: false,
                     },
+                },
+                {
+                    path: 'toBase64',
+                    name: "ToBase64",
+                    component: () => import('@/views/media/graphics/toBase64'),
+                    meta: {
+                        title: 'toBase64',
+                        breadcrumb: false,
+                    },
                 }
             ]
         },

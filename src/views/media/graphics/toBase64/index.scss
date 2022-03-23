@@ -1,0 +1,58 @@
+.to_base64{
+  width: 100%;
+  position: relative;
+  padding: 12px;
+  box-sizing: border-box;
+  .to_base64_box{
+    height: 100%;
+    padding: 24px;
+    box-sizing: border-box;
+    background-color: white;
+    .upload{
+      padding: 0;
+      border: none;
+    }
+    .upload_result{
+      width: 100%;
+      padding: 24px 0;
+      box-sizing: border-box;
+      background: white;
+      .result_content{
+        padding: 6px 4px;
+        box-sizing: border-box;
+        border-radius: 4px;
+        display: flex;
+        flex-wrap: nowrap;
+        transition: all .3s;
+        &:hover{
+          background-color: #eee;
+          transition: all .3s;
+        }
+        .name{
+          min-width: 100px;
+          padding-right: 12px;
+          box-sizing: border-box;
+        }
+        .base64{
+          flex: 1;
+          white-space: nowrap;/*强制一行显示*/
+          overflow:hidden;/*超出部分隐藏*/
+          text-overflow: ellipsis;/*最后添加省略号*/
+        }
+        .copy{
+          width: 200px;
+          background: red;
+        }
+      }
+    }
+  }
+  .dialog_box{
+    #copyValue{
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+  }
+}

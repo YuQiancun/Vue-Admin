@@ -17,7 +17,7 @@
 }
 </style>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .app-enter-active, .app-leave-active {
   transition: all .2s;
 }
