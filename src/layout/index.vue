@@ -11,10 +11,9 @@
 
 <script>
 import LayoutHeader from "./components/Header"
-import LayoutMenu from "./components/Menu"
 export default {
   name: "Layout",
-  components: { LayoutHeader, LayoutMenu },
+  components: { LayoutHeader },
   data() {
     return {}
   }
