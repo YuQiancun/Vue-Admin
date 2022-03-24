@@ -4,18 +4,7 @@
       <LayoutHeader />
     </el-header>
     <el-container class="layout_container">
-      <el-aside class="layout_aside" width="200px">
-        <el-scrollbar wrap-class="scrollbar-wrapper">
-          <LayoutMenu />
-        </el-scrollbar>
-      </el-aside>
-      <el-main class="layout_main">
-        <el-scrollbar ref="scrollbar" wrap-class="scrollbar-wrapper">
-          <transition name="fade" mode="out-in">
-            <router-view />
-          </transition>
-        </el-scrollbar>
-      </el-main>
+
     </el-container>
   </el-container>
 </template>
