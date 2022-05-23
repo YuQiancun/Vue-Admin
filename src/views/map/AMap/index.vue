@@ -59,7 +59,19 @@ export default {
       list: [
         { label: "新增一个随机Marker", on: this.onAddMarker, onName: '新增Marker'},
         { label: "自适应窗口显示Marker", on: this.onSetFitView, onName: '自适应窗口'},
-      ]
+      ],
+      style: {
+        initial: {
+          padding: ".162rem .2rem",
+          "border-radius": ".25rem",
+          width: "",
+          "border-width": 0,
+          "box-shadow": "0 2px 6px 0 rgba(114, 124s, 245, .5)",
+          "text-align": "center",
+          "font-size": "13px",
+          color: "black",
+        }
+      }
     }
   },
   mounted() {
@@ -107,15 +119,39 @@ export default {
       }, 1000)
     },
     onAddMarker() {
-      let list = this.onCreateMarker(this.mapOption.marker)
+      // let list = this.onCreateMarker(this.mapOption.marker)
+      let list = this.setCreateMarker(this.mapOption.marker)
       this.mapOption.markerList = this.mapOption.markerList.concat(list)
-      list.forEach(item => {
-        this.map.add(item)
-      })
+      // list.forEach(item => {
+      //   this.map.add(item)
+      // })
+
+      this.map.add(list)
       // 地图加载完成时执行
       this.map.on('complete', () => {
         this.onSetFitView()
       })
+    },
+    setCreateMarker(list = []) {
+      let marker = []
+      list.forEach((item, index) => {
+        let newMarker = new AMap.Text({
+          text: '纯文本标记',
+          anchor: 'center', // 设置文本标记锚点
+          draggable: false,
+          cursor: 'pointer',
+          angle:0,
+          style: this.style["initial"],
+          position: item,
+          extData: index
+        }).on("click", e => {
+          console.log("AMap Marker Click e: ", e)
+          console.log("PUSH")
+          // this.$router.push({path: "./about" + e.target.getExtData()});
+        })
+        marker.push(newMarker)
+      })
+      return marker
     },
     onCreateMarker(list = []) {
       let marker = []
