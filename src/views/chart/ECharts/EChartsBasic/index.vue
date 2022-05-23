@@ -55,7 +55,7 @@ export default {
   },
   methods: {
     EChartsInit() {
-      this.echarts && this.echarts.destroy()
+      this.echarts && this.echarts.dispose()
       this.echarts = new this.$echarts.init(this.$refs.echartsbasic_box)
       // 使用刚指定的配置项和数据显示图表。
       this.echarts.setOption(this.option);
@@ -64,7 +64,7 @@ export default {
   },
   beforeDestroy() {
     this.Jump && clearTimeout(this.Jump)
-    this.echarts && this.echarts.destroy()
+    this.echarts && this.echarts.dispose()
   }
 }
 </script>
