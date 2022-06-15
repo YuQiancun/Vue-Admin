@@ -1,6 +1,6 @@
 <template>
   <div class="layout_header">
-    <el-button @click="onLoginOut" v-loading="loading">退出</el-button>
+    <el-button @click="onLoginOut" v-loading="loading">{{ $t("message.signOut") }}</el-button>
   </div>
 </template>
 

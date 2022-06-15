@@ -8,5 +8,6 @@ const getters = {
     addRouters: state => state.permission.addRouters,
     defaultRouters: state => state.permission.defaultRouters,
     replaceRouters: state => state.permission.replaceRouters,
+    language: state => state.options.language,
 }
 export default getters

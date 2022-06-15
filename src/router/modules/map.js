@@ -18,6 +18,12 @@ const map = {
             name: 'BMap',
             meta: { title: 'BMap'},
             component: () => import("@/views/map/BMap"),
+        },
+        {
+            path: 'leaflet',
+            name: 'Leaflet',
+            meta: { title: 'Leaflet'},
+            component: () => import("@/views/map/Leaflet"),
         }
     ]
 }

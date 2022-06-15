@@ -54,6 +54,12 @@
         background-color: white;
         //background: linear-gradient(to right, #fff, transparent);
         transition: all .3s;
+        .language_select{
+          position: absolute;
+          top: 12px;
+          right: 12px;
+          width: 100px;
+        }
         .login-form{
 
           .show-pwd {

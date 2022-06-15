@@ -4,6 +4,11 @@
       <div class="module">
         <div class="img" />
         <div class="form nt_container">
+          <div class="language_select">
+            <el-select ref="language" class="nt_input" size="mini" @change="onLanguage" v-model="language" placeholder="请选择">
+              <el-option v-for="(item, index) in options.language" :key="index" :label="item" :value="index" />
+            </el-select>
+          </div>
           <el-form ref="loginForm"
              :model="loginForm"
              :rules="loginRules"
@@ -13,7 +18,7 @@
               :disabled="loading"
           >
             <div class="title-container">
-              <h3 class="title">登录</h3>
+              <h3 class="title">{{ $t('message.loginTitle') }}</h3>
             </div>
 
             <el-form-item prop="username">
@@ -21,7 +26,7 @@
                   class="nt_input"
                   ref="username"
                   v-model="loginForm.username"
-                  placeholder="用户名"
+                  :placeholder="$t('message.userName')"
                   name="username"
                   type="text"
                   tabindex="1"
@@ -37,7 +42,7 @@
                     ref="password"
                     v-model="loginForm.password"
                     :type="passwordType"
-                    placeholder="密码"
+                    :placeholder="$t('message.passWord')"
                     name="password"
                     tabindex="2"
                     autocomplete="on"
@@ -52,7 +57,8 @@
               </el-form-item>
             </el-tooltip>
 
-            <el-button class="nt_button" :loading="loading" type="primary" style="width:100%;" @click.native.prevent="onLogin">登录</el-button>
+            <el-button class="nt_button" :loading="loading" type="primary" style="width:100%;" @click.native.prevent="onLogin">
+              {{ $t("message.signUp") }}</el-button>
           </el-form>
         </div>
       </div>
@@ -68,6 +74,13 @@ export default {
   name: "index",
   data() {
     return {
+      language: this.$store.getters.language,
+      options: {
+        language: {
+          'zh-CN': '中文',
+          'zh-EN': 'English',
+        }
+      },
       loginRules: {
 
       },
@@ -82,6 +95,13 @@ export default {
     }
   },
   methods: {
+    onLanguage(e) {
+      this.$i18n.locale = e
+      this.$store.commit("SET_LANGUAGE", e)
+      this.$nextTick(() => {
+        this.$refs.language.blur()
+      })
+    },
     checkCapslock(e) {
       const { key } = e
       this.capsTooltip = key && key.length === 1 && (key >= 'A' && key <= 'Z')

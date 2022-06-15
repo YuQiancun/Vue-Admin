@@ -45,7 +45,7 @@ export default {
     }
   },
   methods: {
-     onCopy(item) {
+    onCopy(item) {
       this.options.copyLoad = true
       setTimeout(async () => {
         this.copyValue = await item.content
