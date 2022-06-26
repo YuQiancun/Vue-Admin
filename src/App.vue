@@ -14,6 +14,7 @@
   /*min-width: 700px;*/
   position: relative;
   height: 100vh;
+  overflow: hidden;
 }
 </style>
 

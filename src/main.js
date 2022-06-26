@@ -14,7 +14,7 @@ import VueCropper from 'vue-cropper'
 import * as echarts from 'echarts'
 
 Vue.use(VueI18n)
-Vue.use(ElementUI)
+Vue.use(ElementUI, { size: "small" })
 Vue.use(VueCropper)
 const i18n = new VueI18n({
   locale:  localStorage.getItem('language') || 'zh-CN',    // 语言标识

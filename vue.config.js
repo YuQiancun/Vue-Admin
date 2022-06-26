@@ -18,14 +18,22 @@ module.exports = {
         //     }
         // },
         proxy: {
-          '/api': { // 配置跨域的名字
-            target: process.env.VUE_APP_BASE_API, // 跨域的地址(一般是后台ip)
-            changeOrigin: true ,// 是否跨域
-            pathRewrite: { // 当前的名字
-              '^/api': ''
-              // ['^' + process.env.VUE_APP_BASE_API]: ''
+            '/api': { // 配置跨域的名字
+                target: process.env.VUE_APP_BASE_API, // 跨域的地址(一般是后台ip)
+                changeOrigin: true ,// 是否跨域
+                pathRewrite: { // 当前的名字
+                    '^/api': ''
+                    // ['^' + process.env.VUE_APP_BASE_API]: ''
+                }
+            },
+            '/aliOss': { // 配置跨域的名字
+                target: "https://hengchunbang.oss-cn-hangzhou.aliyuncs.com", // 跨域的地址(一般是后台ip)
+                changeOrigin: true,// 是否跨域
+                pathRewrite: { // 当前的名字
+                    '^/aliOss': ''
+                    // ['^' + process.env.VUE_APP_BASE_API]: ''
+                }
             }
-          }
         }
         // port: 7710,
         // proxy: {
