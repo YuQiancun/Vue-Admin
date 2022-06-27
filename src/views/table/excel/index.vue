@@ -3,6 +3,13 @@
     <div class="excel_box">
       <div class="excel_header">
         <div>
+          <div v-for="(item, index) in tableList" :key="index">
+            {{ item.name }}
+            <button @click="onEdit(item)" v-show="item.state">编辑{{ item.state }}</button>
+            <button @click="onEdit(item)" v-show="!item.state">提交{{ !item.state }}</button>
+          </div>
+        </div>
+        <div>
           <el-upload
               action=""
               :on-change="onChange"
@@ -56,6 +63,12 @@ export default {
   name: "Excel",
   data() {
     return {
+      tableList: [
+        { name: 'A'},
+        { name: 'B'},
+        { name: 'C'},
+        { name: 'D'},
+      ],
       loading: false,
       activeName: '',
       workbook: {},
@@ -75,6 +88,11 @@ export default {
 
   },
   methods: {
+    onEdit(item) {
+      console.log(item.state)
+      // item.state = !item.state
+      this.$set(item, "state", !item.state)
+    },
     onTabClick(e) {
       this.activeName = e.name
       this.workBookSheetSlice = this.workBookSheet[this.activeName].body.slice(0, 100)
