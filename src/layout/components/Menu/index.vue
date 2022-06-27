@@ -1,10 +1,7 @@
 <template>
   <div class="menu">
     <div class="menu_box">
-      <el-menu
-          :default-active="defaultActive"
-          router
-      >
+      <el-menu :default-active="defaultActive" router>
         <div v-for="(item, index) in $store.getters.routers" :key="index">
           <LayoutMenuItem :MenuItem="item" />
         </div>
