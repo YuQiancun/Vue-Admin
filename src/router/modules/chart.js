@@ -23,6 +23,32 @@ const chart = {
                     },
                 }
             ]
+        },
+        {
+            path: 'eCharts3d',
+            name: 'ECharts3D',
+            meta: { title: 'ECharts3D'},
+            component: () => import("@/views/chart/ECharts3D"),
+            children: [
+                {
+                    path: 'pie3d',
+                    name: "Pie3D",
+                    component: () => import('@/views/chart/ECharts3D/Pie3D'),
+                    meta: {
+                        title: 'Pie3D',
+                        breadcrumb: false,
+                    },
+                },
+                {
+                    path: 'pieDemo',
+                    name: "PieDemo",
+                    component: () => import('@/views/chart/ECharts3D/PieDemo'),
+                    meta: {
+                        title: 'PieDemo',
+                        breadcrumb: false,
+                    },
+                }
+            ]
         }
     ]
 }

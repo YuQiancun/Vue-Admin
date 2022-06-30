@@ -3,6 +3,13 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<!--   mate 说明
+apple-mobile-web-app-capable 删除苹果的默认工具栏和菜单栏。
+content 默认值为 no ，即正常显示。如果设置为 yes，Web应用会以全屏模式运行，可以通过只读属性 window.navigator.standalone来确定网页是否以全屏模式显示。
+-->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title><%= htmlWebpackPlugin.options.title %></title>
