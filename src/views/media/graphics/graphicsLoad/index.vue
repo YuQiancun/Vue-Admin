@@ -30,17 +30,30 @@ export default {
       ]
     }
   },
+  mounted() {
+  },
   methods: {
-    onGetImg() {
+    onTest() {
+      Axios({
+        url: "/admin/excel/exportExcel",
+        method: "POST",
+        responseType: this.responseTypeKey,
+        headers: {Authorization: "Bearer fdce6334-08e2-42db-a33c-8f6275856195"}
+      }).then(res => {
+        console.log("exportExcel", res)
+      })
+    },
+    async onGetImg() {
+      await this.onTest()
       let params = {
         url: "/aliOss/recognition2022/06/1656251182756.png",
         method: "GET",
         responseType: this.responseTypeKey
       }
-      Axios(params).then(res => {
+      Axios(params).then(async res => {
         console.log(res.data.type)
-        this.UrlBlob = URL.createObjectURL(res.data)
-        fileDownload(res.data, `file${new Date().getTime()}.${this.fileType[res.data.type||'jpeg']}`)
+        this.UrlBlob = await URL.createObjectURL(res.data)
+        await fileDownload(res.data, `file${new Date().getTime()}.${this.fileType[res.data.type||'jpeg']}`)
       })
       // let params = {
       //   url: "/aliOss/recognition2022/06/1656251182756.png",

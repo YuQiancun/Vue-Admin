@@ -33,6 +33,14 @@ module.exports = {
                     '^/aliOss': ''
                     // ['^' + process.env.VUE_APP_BASE_API]: ''
                 }
+            },
+            '/admin': { // 配置跨域的名字
+                target: "http://192.168.1.119:7711/admin", // 跨域的地址(一般是后台ip)
+                changeOrigin: true,// 是否跨域
+                pathRewrite: { // 当前的名字
+                    '^/admin': ''
+                    // ['^' + process.env.VUE_APP_BASE_API]: ''
+                }
             }
         }
         // port: 7710,

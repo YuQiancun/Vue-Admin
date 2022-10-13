@@ -1,29 +1,60 @@
 <template>
   <div class="Leaflet">
-    <div class="Leaflet_box">
-      <div id="Leaflet_Map" >
-        <el-button @click="total += 10">添加</el-button>
-        <el-button @click="total -= 10">减少</el-button>
-      </div>
-      <div id="Leaflet_Map2" >
-        <div v-for="i in total" :key="i">{{i}}</div>
-      </div>
-    </div>
+    <div class="Leaflet_box" id="LeafletMap" ref="leafletMap" />
   </div>
 </template>
 
 <script>
+import * as L from "leaflet"
+// import '@supermap/iclient-leaflet';
+import { tiledMapLayer } from '@supermap/iclient-leaflet';
+
 export default {
   name: "Leaflet",
   data() {
     return {
-      total: 20
+      url: "https://iserver.supermap.io/iserver/services/map-world/rest/maps/World",
+      map: {
+        center: [30.074, 120.34],
+        maxZoom: 18,
+        zoom: 10,
+        iconSize: {
+          Pie: [30, 15],
+          Table: [20, 20],
+        },
+        instance: null,
+        url: "https://iserver.supermap.io/iserver/services/map-world/rest/maps/World",
+        searchUrl: "https://iserver.supermap.io/iserver/services/data-world/rest/data",
+        MarkerArr: []
+      },
+      total: 20,
+      leafletInstance: null
     }
   },
   created() {
   },
+  mounted() {
+    this.initLeaflet()
+  },
   methods: {
-
+    initLeaflet() {
+      // this.leafletMap = L.map("LeafletMap", {})
+      let instance = L.map(this.$refs.leafletMap, {
+        center: this.map.center,
+        zoom: 13
+        // crs: L.CRS.EPSG4326,
+        // center: this.map.center,
+        // maxZoom: this.map.maxZoom,
+        // zoom: this.map.zoom,
+        // inertia: false,
+        // zoomControl: false,
+        // attributionControl: false
+      })
+      this.leafletInstance = instance
+      // let Layer = new L.supermap.TiledMapLayer("https://iserver.supermap.io/iserver/services/map-world/rest/maps/World", {})
+      // Layer.addTo(this.leafletInstance)
+      tiledMapLayer("https://iserver.supermap.io/iserver/services/map-world/rest/maps/World").addTo(instance)
+    }
   }
 }
 </script>
@@ -35,28 +66,18 @@ export default {
   width: 100%;
   min-height: 100%;
   padding: 12px;
-  display: flex;
+
   border: 1px solid red;
   box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 100%;
+
   .Leaflet_box{
     width: 100%;
-    min-height: 100%;
     height: 100%;
     border: 1px solid blueviolet;
     box-sizing: border-box;
-    #Leaflet_Map{
-      position: sticky;
-      top: 0;
-      width: 100%;
-      height: 20%;
-      border: 1px solid sienna;
-      box-sizing: border-box;
-    }
-
-    #Leaflet_Map2{
-      border: 1px solid green;
-      box-sizing: border-box;
-    }
   }
 }
 //.Leaflet{

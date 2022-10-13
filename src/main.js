@@ -6,6 +6,13 @@ import store from './store'
 
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+
+Vue.use(ElementUI, { size: "small" })
+//vant UI库
+import Vant from 'vant';
+import 'vant/lib/index.css';
+Vue.use(Vant);
+
 // 裁剪组件
 import VueCropper from 'vue-cropper'
 // 剪切板插件 直接注册到原型上  不好用已删除
@@ -14,7 +21,6 @@ import VueCropper from 'vue-cropper'
 import * as echarts from 'echarts'
 
 Vue.use(VueI18n)
-Vue.use(ElementUI, { size: "small" })
 Vue.use(VueCropper)
 const i18n = new VueI18n({
   locale:  localStorage.getItem('language') || 'zh-CN',    // 语言标识
